@@ -130,6 +130,11 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+  @font-face {
+    font-family:JennaSue;
+    src: url("https://insighttimer.com/static/media/JennaSue.1b57442a.woff2);
+  }
   
   @font-face {
     font-family: ProximaNovaRegular;
