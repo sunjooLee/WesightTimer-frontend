@@ -1,3 +1,8 @@
+import { createGlobalStyle } from "styled-components";
+import reset from "styled-reset";
+
+const GlobalStyle = createGlobalStyle`
+${reset};
 html,
 body,
 div,
@@ -125,3 +130,31 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+  
+  @font-face {
+    font-family: ProximaNovaRegular;
+    src: url("https://insighttimer.com/static/media/ProximaNova-Regular.ecef0fae.woff2")
+      format("woff2");
+  }
+  
+  @font-face {
+    font-family: ProximaNovaBold;
+    src: url("https://insighttimer.com/static/media/ProximaNova-Bold.571f1669.woff2")
+      format("woff2");
+  }
+  
+  @font-face {
+    font-family: ProximaNovaSemiBold;
+    src: url("https://insighttimer.com/static/media/ProximaNova-Semibold.c8dbfaeb.woff2")
+      format("woff2");
+  }
+  
+  @font-face {
+    font-family: ProximaNovaLight;
+    src: url("https://insighttimer.com/static/media/ProximaNova-Light.e0bf8389.woff2")
+      format("woff2");
+  }
+
+`;
+
+export default GlobalStyle;
