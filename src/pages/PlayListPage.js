@@ -33,7 +33,7 @@ const PlayListPage = () => {
     }
 
     return (
-        <div className="PlayList">
+        <div className="PlayListPage">
             {/* <Nav /> */}
             <TitleArea>
                 <TitleText>Playlists</TitleText>
