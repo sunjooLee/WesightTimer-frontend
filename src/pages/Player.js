@@ -1,5 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react';
 import axios from "axios";
+import { pickIndexStyle } from "./PickIndexStyle";
 import {withRouter} from 'react-router-dom';
 import styled, {keyframes} from 'styled-components';
 
@@ -7,9 +8,11 @@ const Player = (props) => {
 
     const [isBtnClicked, setBtnClicked] = useState(false);
     const [play5items, setPlay5items] = useState([]);
-    const [audioFile, setaudioFile] = useState('https://libraryaudio.insighttimer.com/k8f0q2v0t5b9r7m2f4r7x1d3h1k5w5v2c8j9z4s3%2Faudio%2Fstandard_quality.mp3?alt=media');
+    const [playlist, setPlaylist] = useState([]);
+    //const [audioFile, setaudioFile] = useState('https://libraryaudio.insighttimer.com/k8f0q2v0t5b9r7m2f4r7x1d3h1k5w5v2c8j9z4s3%2Faudio%2Fstandard_quality.mp3?alt=media');
+    const [audioFile, setaudioFile] = useState('http://10.58.1.171:8005/content');
     const audio = useRef(new Audio(audioFile));
-
+    const [indexOrder, setindexOrder] = useState((props.match.params.id)-1);
     const playSong = () => {
         
         if(isBtnClicked === false){
@@ -33,20 +36,45 @@ const Player = (props) => {
         props.history.goBack();
     }
 
+    //onClick 되면 배열 위치 바뀌게 하고 transition을 width랑 height에 걸어주기
+
+    const changeMapItem = (id) => {
+
+        console.log("id     :", id);
+        setindexOrder(id);
+
+        if(id >= 10 || id<1){
+            setindexOrder(1);
+
+        } else {
+            const newArr = [playlist[id-1],playlist[id],playlist[id-1],playlist[id],playlist[id+1]];
+            setPlay5items(newArr);
+        }
+       
+    }
+
     //async await
     const fetchPlaylist = async () => {
         const playlistData = await axios(`http://localhost:3000/Data/Playlist.json`);
-        const filtered5items = playlistData.data.playlist.music.filter((item,idx)=> idx<=4);
-        //slice로 잘라주고 concat으로 합쳐준다
-        setPlay5items(filtered5items.slice(3,5).reverse().concat(filtered5items.slice(0,3)));
+        const datalist = playlistData.data.playlist.music;
+        setPlaylist(datalist);
+        let playlistDt;
+
+
+        if(indexOrder <=3){
+            playlistDt = [datalist[datalist.length-2],datalist[datalist.length-1],datalist[indexOrder], datalist[indexOrder+1], datalist[indexOrder+2]];
+            setPlay5items(playlistDt);
+        } else {
+            playlistDt = [datalist[indexOrder-2],datalist[indexOrder-1],datalist[indexOrder], datalist[indexOrder+1], datalist[indexOrder+2]];
+            setPlay5items(playlistDt);
+        }
+        
     };
 
     //useEffect 호출 
     useEffect(()=> {
         fetchPlaylist();
     }, []);
-
-    console.log("current state  ", play5items);
 
     return (
             <PlayerWrapper>
@@ -61,48 +89,26 @@ const Player = (props) => {
                         <PlayCoverWrapper>
                         <AlbumCoversWrapper>
                         {
-                            play5items && play5items.map((item,idx, arr)=> {
+                            play5items.length && play5items.map((item, idx, arr)=> {
 
-                                    let zPositionNum = "";
-                                    let leftVal = "";
-                                    let rightVal = "";
-
-                                    switch(idx){
-
-                                        case 0: 
-                                        zPositionNum = "3";
-                                        leftVal = "0";
-                                        break;
-
-                                        case 1:
-                                        zPositionNum = "2";
-                                        leftVal = "10%";
-                                        break;
-
-                                        case 2:
-                                        zPositionNum = "1";
-                                        break;
-
-                                        case 3:
-                                        zPositionNum = "2";
-                                        rightVal = "10%";
-                                        break;
-
-                                        case 4:
-                                        zPositionNum = "3";
-                                        rightVal = "0";
-                                        break;
-
-                                        default:
-                                        break;
-                                    }
+                                    let zPositionNum = pickIndexStyle(idx).zPositionNum;
+                                    let leftVal = pickIndexStyle(idx).leftVal;
+                                    let rightVal = pickIndexStyle(idx).rightVal;
 
                                     return (
-                                        <CapitalImg ZPositionId={zPositionNum} leftVal={leftVal} rightVal={rightVal} index={idx} array={arr}>
+
+                                        <CapitalImg
+                                            ZPositionId={zPositionNum}
+                                            leftVal={leftVal}
+                                            rightVal={rightVal}
+                                            index={idx}
+                                            array={arr}
+                                            onClick={()=>{changeMapItem(item.id)}}
+                                        >
                                         <DescBoxGradient>
                                             <DescBox>
-                                                <H3>{item.title}</H3>
-                                                <TeacherBtn><Span>{item.teacher}</Span></TeacherBtn>
+                                                {idx === 2 && <H3>{item.title}</H3>}
+                                                {idx === 2 && <TeacherBtn><Span>{item.teacher}</Span></TeacherBtn>}
                                             </DescBox>
                                         </DescBoxGradient>
                                         </CapitalImg>
@@ -216,22 +222,21 @@ const CapitalImg = styled.div`
     position: absolute;
     left: ${props => props.leftVal};
     right: ${props=>props.rightVal};
-
+    
     ${props => {
-        console.log(props.ZPositionId);
     if(props.ZPositionId === "3") {
-        return `width: 260px;
-                height: 260px;
+        return `width: 210px;
+                height: 210px;
                 z-index: 1;
         `;
     } else if(props.ZPositionId === "2"){
-        return `width: 346.67px;
-                height: 346.67px;
+        return `width: 280px;
+                height: 280px;
                 z-index: 2;
         `;
     } else {
-        return `width: 520px;
-                height: 520px;
+        return `width: 420px;
+                height: 420px;
                 z-index: 3;
         `;
     }
@@ -245,7 +250,10 @@ const CapitalImg = styled.div`
     overflow: hidden;
 
     &:hover {
-    transform: ${props => props.ZPositionId === "1" ? 'translateY(-20px)' : ''}
+
+    transform: ${props => props.ZPositionId === "1" ? 'translateY(-20px)' : ''};
+    transition: transform 0.35s ease-in-out;
+    box-shadow: ${props => props.ZPositionId === "1" ? `0 10px 40px -10px rgba(24,24,24,0.5);` : ''};
     }
 `;
 
