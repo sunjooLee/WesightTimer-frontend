@@ -1,8 +1,26 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from "axios";
+import { withRouter, Link } from "react-router-dom";
 import Nav from '../components/Nav';
 import styled from 'styled-components';
 
-const ListedPlayer = () => {
+const ListedPlayer = (props) => {
+
+    const [playitem, setPlayitem] = useState(1);
+    const [category, setCategory] = useState([]);
+    const [playlist, setPlaylist] = useState([]);
+
+    //async await
+    const fetchPlaylist = async () => {
+            const playlistData = await axios(`http://localhost:3000/Data/Playlist.json`);
+            setCategory(playlistData.data.playlist.category);
+            setPlaylist(playlistData.data.playlist.music);
+    };
+
+    //useEffect 호출 
+    useEffect(()=> {
+        fetchPlaylist();
+    }, []);
 
     return (
         <ListedPlayerDiv>
@@ -19,13 +37,13 @@ const ListedPlayer = () => {
                         <PlayBtn><Svg width="22" height="26" viewBox="0 0 22 26" class="jss418 relative"><path fill="#191919" fill-rule="evenodd" d="M0 2.065v21.577c0 1.105.895 2 2 2 .375 0 .742-.105 1.06-.304L20.322 14.55c.936-.586 1.221-1.82.636-2.756-.161-.258-.379-.476-.636-.636L3.06.368C2.123-.216.89.069.304 1.006.105 1.323 0 1.69 0 2.065z"></path></Svg></PlayBtn>
                     </BottomStyleCont>
                     <ContentWrapper>
-                        <TitleDiv>Anxiety Relief</TitleDiv>
+                    <TitleDiv>{category.title}</TitleDiv>
                         <LogoDiv>
                             <Logo src="https://users.insighttimer.com/m7K4F2Q5S7X3a1j6U8a6X8B0a1e7R1g8E3z4b5k1C8L0Q8B3J6J0k8X5x2J1V6n2u9j3P1u6W0c3L2v3c8f3W7z6H7t4E1t6t0B0%2Fpictures%2Fsquare_small.jpeg?alt=media" alt="logo"/>
-                            <AtagMsg>Insight Timer</AtagMsg>
+                    <AtagMsg>{category.teacher}</AtagMsg>
                         </LogoDiv>
                         <TextCont>
-                            <Ptag>In our fast paced world, <Strong>#anxiety</Strong> is at an all time high. These practices will help you #befrienddanxiety as you slow things down, regain control of your mind and find <Strong>#peace</Strong> in each moment.</Ptag>
+                        <Ptag>{category.describe}</Ptag>
                         </TextCont>
                         <FollowBtn>Follow</FollowBtn>
                         <FollowersDesc><Span>1K</Span> followers</FollowersDesc>
@@ -35,58 +53,25 @@ const ListedPlayer = () => {
 
             <PlayListWrapper>
 
-            <Playlist>
-                <PrImg src="https://libraryitems.insighttimer.com/k8f0q2v0t5b9r7m2f4r7x1d3h1k5w5v2c8j9z4s3%2Fpictures%2Fsquare_medium.jpeg?alt=media" alt="playlist image"/>
-                <TitleBox>
-                <DivPrTitle>Working With Anxiety</DivPrTitle>
-                <Teacher>Manoj Dias</Teacher>
-                </TitleBox>
-                <SpanPr>14 min</SpanPr>
-                <SendBtn><ImgBtn src="https://insighttimer.com/static/media/share-icon.c19cdc22.svg"/></SendBtn>
-            </Playlist>
-
-            <Playlist>
-                <PrImg src="https://libraryitems.insighttimer.com/k8f0q2v0t5b9r7m2f4r7x1d3h1k5w5v2c8j9z4s3%2Fpictures%2Fsquare_medium.jpeg?alt=media" alt="playlist image"/>
-                <TitleBox>
-                <DivPrTitle>Working With Anxiety</DivPrTitle>
-                <Teacher>Manoj Dias</Teacher>
-                </TitleBox>
-                <SpanPr>14 min</SpanPr>
-                <SendBtn><ImgBtn src="https://insighttimer.com/static/media/share-icon.c19cdc22.svg"/></SendBtn>
-            </Playlist>
-
-            <Playlist>
-                <PrImg src="https://libraryitems.insighttimer.com/k8f0q2v0t5b9r7m2f4r7x1d3h1k5w5v2c8j9z4s3%2Fpictures%2Fsquare_medium.jpeg?alt=media" alt="playlist image"/>
-                <TitleBox>
-                <DivPrTitle>Working With Anxiety</DivPrTitle>
-                <Teacher>Manoj Dias</Teacher>
-                </TitleBox>
-                <SpanPr>14 min</SpanPr>
-                <SendBtn><ImgBtn src="https://insighttimer.com/static/media/share-icon.c19cdc22.svg"/></SendBtn>
-            </Playlist>
-
-            <Playlist>
-                <PrImg src="https://libraryitems.insighttimer.com/k8f0q2v0t5b9r7m2f4r7x1d3h1k5w5v2c8j9z4s3%2Fpictures%2Fsquare_medium.jpeg?alt=media" alt="playlist image"/>
-                <TitleBox>
-                <DivPrTitle>Working With Anxiety</DivPrTitle>
-                <Teacher>Manoj Dias</Teacher>
-                </TitleBox>
-                <SpanPr>14 min</SpanPr>
-                <SendBtn><ImgBtn src="https://insighttimer.com/static/media/share-icon.c19cdc22.svg"/></SendBtn>
-            </Playlist>
-
-            <Playlist>
-                <PrImg src="https://libraryitems.insighttimer.com/k8f0q2v0t5b9r7m2f4r7x1d3h1k5w5v2c8j9z4s3%2Fpictures%2Fsquare_medium.jpeg?alt=media" alt="playlist image"/>
-                <TitleBox>
-                <DivPrTitle>Working With Anxiety</DivPrTitle>
-                <Teacher>Manoj Dias</Teacher>
-                </TitleBox>
-                <SpanPr>14 min</SpanPr>
-                <SendBtn><ImgBtn src="https://insighttimer.com/static/media/share-icon.c19cdc22.svg"/></SendBtn>
-            </Playlist>
-
+           
+            {playlist && playlist.map((item) => {
+                return (
+                    <Link to={`/playlist/${item.id}`}>
+                    <Playlist onClick={()=>{
+                        setPlayitem(playitem);
+                        }}>
+                        <PrImg src= {item.imgUrl} alt="playlist image"/>
+                        <TitleBox>
+                        <DivPrTitle>{item.title}</DivPrTitle>
+                        <Teacher>{item.teacher}</Teacher>
+                        </TitleBox>
+                        <SpanPr>{item.playtime}</SpanPr>
+                        <SendBtn><ImgBtn src="https://insighttimer.com/static/media/share-icon.c19cdc22.svg"/></SendBtn>
+                    </Playlist>
+                    </Link>
+                );
+            })}
             </PlayListWrapper>
-
         </ListedPlayerDiv>
     )
 
@@ -341,4 +326,4 @@ const ImgBtn = styled.img`
 
 
 
-export default ListedPlayer;
+export default withRouter(ListedPlayer);
