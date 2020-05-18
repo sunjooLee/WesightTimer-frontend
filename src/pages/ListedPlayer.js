@@ -12,9 +12,10 @@ const ListedPlayer = (props) => {
 
     //async await
     const fetchPlaylist = async () => {
-        const playlistData = await axios(`http://localhost:3000/Data/Playlist.json`);
-        setCategory(playlistData.data.playlist.category);
-        setPlaylist(playlistData.data.playlist.music);
+            //const playlistData = await axios.get(`http://10.58.2.238:8005/content/playlistinfo?play_list_id=1`);
+            const playlistData = await axios.get(`http://localhost:3000/Data/Playlist.json`);
+            setCategory(playlistData.data.playlist);
+            setPlaylist(playlistData.data.content);
     };
 
     //useEffect 호출 
@@ -26,20 +27,20 @@ const ListedPlayer = (props) => {
         <ListedPlayerDiv>
             <LeftCardDiv>
                 <Card>
-                    <ImgBox>
-                        <ImgLeft />
+                    {playlist.length && <ImgBox>
+                        <ImgLeft img={playlist[0].imgurl}/>
                         <ImgRight>
-                            <Img position="center" />
-                            <Img position="bottom" marginBottomNone="true" />
+                            <Img position="center" img={playlist[1].imgurl}/>
+                            <Img position="bottom" img={playlist[2].imgurl} marginBottomNone="true"/>
                         </ImgRight>
-                    </ImgBox>
+                    </ImgBox>}
                     <BottomStyleCont>
-                        <Link to={`/playlist/1`}>
-                            <PlayBtn><Svg width="22" height="26" viewBox="0 0 22 26" class="jss418 relative"><path fill="#191919" fill-rule="evenodd" d="M0 2.065v21.577c0 1.105.895 2 2 2 .375 0 .742-.105 1.06-.304L20.322 14.55c.936-.586 1.221-1.82.636-2.756-.161-.258-.379-.476-.636-.636L3.06.368C2.123-.216.89.069.304 1.006.105 1.323 0 1.69 0 2.065z"></path></Svg></PlayBtn>
-                        </Link>
+                     <Link to={`/playlist/1`}>
+                        <PlayBtn><Svg width="22" height="26" viewBox="0 0 22 26" class="jss418 relative"><path fill="#191919" fill-rule="evenodd" d="M0 2.065v21.577c0 1.105.895 2 2 2 .375 0 .742-.105 1.06-.304L20.322 14.55c.936-.586 1.221-1.82.636-2.756-.161-.258-.379-.476-.636-.636L3.06.368C2.123-.216.89.069.304 1.006.105 1.323 0 1.69 0 2.065z"></path></Svg></PlayBtn>
+                     </Link>
                     </BottomStyleCont>
                     <ContentWrapper>
-                        <TitleDiv>{category.title}</TitleDiv>
+                    {category && <TitleDiv>{category.title}</TitleDiv>}
                         <LogoDiv>
                             <Logo src="https://users.insighttimer.com/m7K4F2Q5S7X3a1j6U8a6X8B0a1e7R1g8E3z4b5k1C8L0Q8B3J6J0k8X5x2J1V6n2u9j3P1u6W0c3L2v3c8f3W7z6H7t4E1t6t0B0%2Fpictures%2Fsquare_small.jpeg?alt=media" alt="logo" />
                             <AtagMsg>{category.teacher}</AtagMsg>
@@ -54,25 +55,24 @@ const ListedPlayer = (props) => {
             </LeftCardDiv>
 
             <PlayListWrapper>
-
-
-                {playlist && playlist.map((item) => {
-                    return (
-                        <Link to={`/playlist/${item.id}`}>
-                            <Playlist onClick={() => {
-                                setPlayitem(playitem);
-                            }}>
-                                <PrImg src={item.imgUrl} alt="playlist image" />
-                                <TitleBox>
-                                    <DivPrTitle>{item.title}</DivPrTitle>
-                                    <Teacher>{item.teacher}</Teacher>
-                                </TitleBox>
-                                <SpanPr>{item.playtime}</SpanPr>
-                                <SendBtn><ImgBtn src="https://insighttimer.com/static/media/share-icon.c19cdc22.svg" /></SendBtn>
-                            </Playlist>
-                        </Link>
-                    );
-                })}
+           
+            {playlist.length && playlist.map((item) => {
+                return (
+                    <Link to={`/playlist/${item.id}`}>
+                    <Playlist onClick={()=>{
+                        setPlayitem(playitem);
+                        }}>
+                        <PrImg src= {item.imgurl} alt="playlist image"/>
+                        <TitleBox>
+                        <DivPrTitle>{item.title}</DivPrTitle>
+                        <Teacher>{item.teacher}</Teacher>
+                        </TitleBox>
+                        <SpanPr>{item.playtime}</SpanPr>
+                        <SendBtn><ImgBtn src="https://insighttimer.com/static/media/share-icon.c19cdc22.svg"/></SendBtn>
+                    </Playlist>
+                    </Link>
+                );
+            })}
             </PlayListWrapper>
         </ListedPlayerDiv>
     )
@@ -120,7 +120,7 @@ const ImgBox = styled.div`
 `;
 
 const ImgLeft = styled.div`
-   background-image: url("https://playlists.insighttimer.com/BlNnKkR6cSGO1f9ciyqw%2Fpictures%2Fmontage_medium.jpeg?alt=media");
+   background-image: ${props => `url(${props.img})`};
    flex:3;
    margin-right: 0.25rem;
    background-size: 135%;
@@ -134,7 +134,7 @@ const ImgRight = styled.div`
 `;
 
 const Img = styled.div`
-    background-image: url("https://playlists.insighttimer.com/BlNnKkR6cSGO1f9ciyqw%2Fpictures%2Fmontage_medium.jpeg?alt=media");
+    background-image: ${props => `url(${props.img})`};
     flex:1;
     margin-bottom: ${props => props.marginBottomNone ? 0 : "0.25rem"};
     background-size: cover;
