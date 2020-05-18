@@ -1,9 +1,14 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState } from 'react'
+import styled, { ThemeProvider } from 'styled-components';
+import theme from '../styles/theme';
 
-const Nav = () => {
+const NavWrapper = ({ onClickFromMain }) => {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
   return (
-    <Nav1>
+    <Nav>
       <MuitoolWrapper>
         <FloatLeft>
           <Img src="https://insighttimer.com/static/media/appIcon.9ffac779.png" />
@@ -31,29 +36,28 @@ const Nav = () => {
             <Span>Teachers</Span>
           </MuiGridteachers>
         </CentermuiGrid>
-        <FloatRight>
-          <MuiSvgIcondiv>
+        <FloatRight >
+          <MuiSvgIcondiv >
             <IconSvg>
               <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
             </IconSvg>
-            <Button>
+            <Button onClick={() => onClickFromMain()}>
               <Span1>Sign In</Span1>
             </Button>
           </MuiSvgIcondiv>
         </FloatRight>
       </MuitoolWrapper>
-    </Nav1>
+    </Nav >
   );
 };
 
-export default Nav;
 
-const Nav1 = styled.div`
+
+const Nav = styled.div`
+/* z-index: 1004; */
   box-sizing: border-box;
   border: 1px solid white;
   max-width: 0 auto;
-  padding-left: 40px;
-  padding-right: 40px;
   width: 100%;
 `;
 
@@ -77,7 +81,6 @@ const FloatLeft = styled.div`
 
 const MuiSvgIcondiv = styled.div`
   display: flex;
-  border: 1px solid white;
   width: 165px;
 `;
 
@@ -131,6 +134,7 @@ const Span = styled.span`
 
 const Span1 = styled.span`
   font-size: 17px;
+  cursor: pointer;
 `;
 
 const Span2 = styled.span`
@@ -161,3 +165,6 @@ const MuiGridteachers = styled.div`
 const FloatRight = styled.div`
   display: flex;
 `;
+
+export default NavWrapper;
+

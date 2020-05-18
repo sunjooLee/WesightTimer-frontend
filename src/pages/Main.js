@@ -185,14 +185,21 @@ const Freesvg = styled.svg`
 
 const Webheder = styled.div`
   padding-top: 100px;
-
   display: flex;
   justify-content: center;
-  border: 1px solid black;
   width: 950px;
   overflow: hidden;
   line-height: 1.2;
   text-align: center;
+  `;
+
+const Div = styled.div`
+    margin-top: 20px;
+    padding-right: 4px;
+    font-size: 15px;
+    font-family: ProximaNovaRegular;
+    color: #373943;
+
 `;
 
 const Thelarge = styled.span`
@@ -209,11 +216,25 @@ const ContentsWrap = styled.section`
   display: flex;
 `;
 
+
 const SwiperWrap = styled.section`
   width: 3200px;
   padding-top: 20px;
   display: flex;
-  transform: ${(props) => `translateX(${props.translate}px)`};
+  transform: ${(props) => `translateX(${props.translate}px)`}
+  }`;
+
+const MainDiv = styled.div`
+    padding: 0px 40px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+    --vh: 9.16px;
+    align-self: center;
+    position: absolute;
+    top: 0;
+    left: 0;
 `;
 
 const directionIcon = styled.div``;

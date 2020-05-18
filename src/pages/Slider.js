@@ -10,7 +10,7 @@ const Slider = () => {
 
   const handleClickRight = () => {
     setNumber(number + 1);
-    setTranslate(translate - (290+15));
+    setTranslate(translate - (290 + 15));
     console.log(`number: `, number);
     // console.log(“translate: “, translate);
     // console.log(“aaaa”, button);
@@ -22,7 +22,7 @@ const Slider = () => {
   const handleClickLeft = () => {
     setNumber(number - 1);
     // setTranslate(translate + 424.75);
-    setTranslate(translate + (290+15));
+    setTranslate(translate + (290 + 15));
     console.log(`sas: `, number);
     if (number === 1) {
       setButton(`hidden`);
@@ -82,6 +82,7 @@ const Slider = () => {
 
 const Essentialwrap = styled.div`
   position: relative;
+  color: #FFFFFF;
 `;
 
 const Js23wfull = styled.span`

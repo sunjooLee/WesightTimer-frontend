@@ -15,11 +15,9 @@ const PlayListPage = () => {
         setNumber(number + 1)
         setTranslate(translate - 424.75)
         console.log("number: ", number);
-        // console.log("translate: ", translate);
-        // console.log("aaaa", button);
+        // console.log("translate: ", translate);        
         if (number >= 0) {
             setButton("visible");
-            // console.log("bbbb", button);
         }
     }
 
