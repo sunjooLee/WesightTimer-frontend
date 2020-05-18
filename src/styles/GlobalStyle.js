@@ -131,6 +131,10 @@ table {
   border-spacing: 0;
 }
 
+button:focus {
+  outline: none;
+}
+
   @font-face {
     font-family: JennaSue;
     src: url("https://insighttimer.com/static/media/JennaSue.1b57442a.woff2")
