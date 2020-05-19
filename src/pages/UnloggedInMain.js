@@ -12,8 +12,6 @@ const UnloggedInMain = () => {
         setIsModalOpen(true);
     }
 
-    // console.log("Main.js - isModalOpen : ", isModalOpen)
-
     return (
         <>
             <ViewDiv>

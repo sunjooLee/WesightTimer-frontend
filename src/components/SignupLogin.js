@@ -1,4 +1,5 @@
-import React, { useState, Link } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { image, facebookLink } from '../config';
 
@@ -7,24 +8,65 @@ const SignupLogin = () => {
     const [emailInput, setEmailInput] = useState("");
     const [nameInput, setnameInput] = useState("");
     const [passwordInput, setPasswordInput] = useState("");
+    const [loginMessage, setLoginMessage] = useState("");
+
+    const emailRule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
     const signupHandleInput = () => {
         console.log("emailInput", emailInput);
         console.log("nameInput", nameInput);
         console.log("passwordInput", passwordInput);
+
+        if (emailInput === "") {
+            setLoginMessage("Email is required.");
+        } else if (nameInput === "") {
+            setLoginMessage("nameInput is required.");
+        } else if (passwordInput === "") {
+            setLoginMessage("Password is required.");
+        }
+        else {
+            if (!(emailRule.test(emailInput))) {
+                setLoginMessage("Email is invalid.");
+            }
+            if (passwordInput.length < 6) {
+                setLoginMessage("Password minimum 6 chars.");
+            }
+        }
     }
+
+    const handle = () => {
+        fetch(`http://10.58.2.229:8000/user/signup`, {
+            method: 'POST',
+            body: JSON.stringify({
+                email: emailInput,
+                full_name: nameInput,
+                password: passwordInput,
+            }),
+        })
+            .then((response) => {
+                console.log(response.message);
+                if (response.message === 200) {
+                    alert("회원가입 되셨습니다.");
+                } else if (response.message === 400) {
+                    alert("다시 확인해 주세요.")
+                }
+            });
+    }
+    // useEffect(() => {
+
+    // }, [])
 
     return (
         <ModalArea>
             <Contents>
                 <ImageIcon src={image} alt="iamge" />
                 <WelcomeText>Create your free account</WelcomeText>
-                {/* <Link to={facebookLink}> */}
-                <FacebookButton>
-                    <FacebookIcon src="https://insighttimer.com/static/media/facebook-circular-logo.078994bf.svg" alt="facebookIcon" />
-                    <FacebookText >Continue with Facebook</FacebookText>
-                </FacebookButton>
-                {/* </Link> */}
+                <Link to={facebookLink} target="_blank">
+                    <FacebookButton>
+                        <FacebookIcon src="https://insighttimer.com/static/media/facebook-circular-logo.078994bf.svg" alt="facebookIcon" />
+                        <FacebookText >Continue with Facebook</FacebookText>
+                    </FacebookButton>
+                </Link>
                 <Or>
                     <Hr />
                     <OrText>or</OrText>
@@ -36,7 +78,8 @@ const SignupLogin = () => {
                 <InputName onChange={(e) => setnameInput(e.target.value)} />
                 <PasswordText>Create password</PasswordText>
                 <InputPassword placeholder="Minimum of 6 characters" onChange={(e) => setPasswordInput(e.target.value)} />
-                <LoginButton onClick={signupHandleInput}>Create account</LoginButton>
+                <Validation>{loginMessage}</Validation>
+                <LoginButton onClick={handle}>Create account</LoginButton>
             </Contents>
         </ModalArea>
 
@@ -188,6 +231,12 @@ const InputPassword = styled.input`
         font-size: 16px;
         color: #b6b6b6; 
     }
+`;
+
+const Validation = styled.p`
+    padding: 16px 0;
+    color: #fb2525;
+    font-size: 14px;
 `;
 
 const LoginButton = styled.button`

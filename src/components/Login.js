@@ -1,26 +1,68 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { image } from '../config';
+import { image, facebookLink } from '../config';
 
 const Login = () => {
 
     const [emailInput, setEmailInput] = useState("");
     const [passwordInput, setPasswordInput] = useState("");
+    const [loginMessage, setLoginMessage] = useState("");
 
-    const signupHandleInput = () => {
-        console.log("aa", emailInput);
-        console.log("bb", passwordInput);
+    const emailRule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+    const loginHandleInput = () => {
+        console.log("Email", emailInput);
+        console.log("Password", passwordInput);
+
+        if (emailInput === "") {
+            setLoginMessage("Email is required.");
+        } else if (passwordInput === "") {
+            setLoginMessage("Password is required.");
+        }
+        else {
+            if (!(emailRule.test(emailInput))) {
+                setLoginMessage("Email is invalid.");
+            }
+            if (passwordInput.length < 6) {
+                setLoginMessage("Password minimum 6 chars.");
+            }
+        }
     }
+
+    const handleLogin = () => {
+        fetch(`http://10.58.2.229:8000/user/signin`, {
+            method: 'POST',
+            body: JSON.stringify({
+                email: emailInput,
+                password: passwordInput,
+            })
+        })
+            .then((response) => response.json())
+            .then((response) => {
+                console.log("성공");
+                if (response.token_issued) {
+                    localStorage.setItem("token", response.token_issued);
+                    alert("로그인 성공!");
+                }
+            })
+    }
+
+    // useEffect(() => {
+
+    // }, []);
 
     return (
         <ModalArea>
             <Contents>
                 <ImageIcon src={image} alt="iamge" />
                 <WelcomeText>Glad to have you back!</WelcomeText>
-                <FacebookButton>
-                    <FacebookIcon src="https://insighttimer.com/static/media/facebook-circular-logo.078994bf.svg" alt="facebookIcon" />
-                    <FacebookText>Log in with Facebook</FacebookText>
-                </FacebookButton>
+                <Link to={facebookLink} target="_blank">
+                    <FacebookButton>
+                        <FacebookIcon src="https://insighttimer.com/static/media/facebook-circular-logo.078994bf.svg" alt="facebookIcon" />
+                        <FacebookText>Log in with Facebook</FacebookText>
+                    </FacebookButton>
+                </Link>
                 <Or>
                     <Hr />
                     <OrText>or</OrText>
@@ -29,9 +71,10 @@ const Login = () => {
                 <EmailText>Email address</EmailText>
                 <InputEmail onChange={(e) => setEmailInput(e.target.value)} />
                 <PasswordText>Password</PasswordText>
-                <InputPassword onChange={(e) => setPasswordInput(e.target.value)} />
+                <InputPassword type="password" onChange={(e) => setPasswordInput(e.target.value)} />
                 <ForgotLink href="https://profile.insighttimer.com/profile_recover_password" target="blank_">Forgot</ForgotLink>
-                <LoginButton onClick={signupHandleInput}>Log in</LoginButton>
+                <Validation>{loginMessage}</Validation>
+                <LoginButton onClick={handleLogin}>Log in</LoginButton>
             </Contents>
         </ModalArea>
 
@@ -152,7 +195,7 @@ const InputPassword = styled.input`
     font-size: 16px;
     padding: 12px 70px 12px 12px; 
     border-radius: 5px;
-    margin-bottom: 24px;     
+    /* margin-bottom: 24px;      */
     :focus {
         outline: none;
         border: 2px solid #000000;       
@@ -178,3 +221,20 @@ const LoginButton = styled.button`
     font-size: 16px;
     cursor: pointer;
 `;
+
+const Validation = styled.p`
+    padding: 16px 0;
+    color: #fb2525;
+    font-size: 14px;    
+`;
+
+// “email” : “bonghyun13@naver.com”,
+// “full_name” : “bonghyun12",
+// “password” : “asdf12345"
+
+
+// {
+//     “email” : “asdfzxcv@naver.com”,
+//     “full_name” : “bonghyun12",
+//     “password” : “1234567"
+//     }
