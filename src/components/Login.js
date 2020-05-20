@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { image, facebookLink } from '../config';
 
-const Login = () => {
+const Login = (props) => {
 
     const [emailInput, setEmailInput] = useState("");
     const [passwordInput, setPasswordInput] = useState("");
@@ -31,7 +31,7 @@ const Login = () => {
     }
 
     const handleLogin = () => {
-        fetch(`http://10.58.2.229:8000/user/signin`, {
+        fetch(`http://10.58.2.238:8005/user/signin`, {
             method: 'POST',
             body: JSON.stringify({
                 email: emailInput,
@@ -40,17 +40,13 @@ const Login = () => {
         })
             .then((response) => response.json())
             .then((response) => {
-                console.log("성공");
                 if (response.token_issued) {
                     localStorage.setItem("token", response.token_issued);
-                    alert("로그인 성공!");
+                    props.history.push("/main")
                 }
             })
     }
 
-    // useEffect(() => {
-
-    // }, []);
 
     return (
         <ModalArea>
@@ -81,9 +77,7 @@ const Login = () => {
     );
 }
 
-export default Login;
-
-// styled-components
+export default withRouter(Login);
 
 const ModalArea = styled.section`
     width: 700px;
@@ -227,14 +221,3 @@ const Validation = styled.p`
     color: #fb2525;
     font-size: 14px;    
 `;
-
-// “email” : “bonghyun13@naver.com”,
-// “full_name” : “bonghyun12",
-// “password” : “asdf12345"
-
-
-// {
-//     “email” : “asdfzxcv@naver.com”,
-//     “full_name” : “bonghyun12",
-//     “password” : “1234567"
-//     }

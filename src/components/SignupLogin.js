@@ -35,7 +35,7 @@ const SignupLogin = () => {
     }
 
     const handle = () => {
-        fetch(`http://10.58.2.229:8000/user/signup`, {
+        fetch(`http://10.58.2.238:8005/user/signup`, {
             method: 'POST',
             body: JSON.stringify({
                 email: emailInput,
@@ -44,10 +44,10 @@ const SignupLogin = () => {
             }),
         })
             .then((response) => {
-                console.log(response.message);
-                if (response.message === 200) {
+                console.log(response.status);
+                if (response.status === 200) {
                     alert("회원가입 되셨습니다.");
-                } else if (response.message === 400) {
+                } else if (response.status === 400) {
                     alert("다시 확인해 주세요.")
                 }
             });
