@@ -42,9 +42,7 @@ export default LoginSelector;
 // styled-components
 
 const ViewArea = styled.div`
-    visibility: ${props => props.isVisible ? "visible" : "hidden"
-
-    };
+    visibility: ${props => props.isVisible ? "visible" : "hidden"};
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.87);
@@ -73,8 +71,7 @@ const Overlay = styled.div`
 const ModalArea = styled.section`
     width: 700px;   
     z-index: 3;
-    opacity: 1;
-   
+    opacity: 1;   
 `;
 
 const ButtonArea = styled.div`

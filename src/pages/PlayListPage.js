@@ -155,7 +155,8 @@ const ListWrap = styled.section`
     width: 1650px;      
     height: 548px;    
     overflow:hidden;      
-    position: relative;      
+    position: relative;
+    
 `;
 
 const ContentsWrap = styled.div`  
@@ -165,7 +166,8 @@ const ContentsWrap = styled.div`
     width: 100%;   
     position: absolute;     
     left:0;
-    transform: translateX(${props => props.translate}px);    
+    transform: translateX(${props => props.translate}px); 
+    //transition: transform .8s ease-in-out;    
 `;
 
 const PrevButton = styled.button`
