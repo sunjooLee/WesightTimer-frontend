@@ -3,16 +3,18 @@ import axios from "axios";
 import { pickIndexStyle } from "./PickIndexStyle";
 import {withRouter, Link} from 'react-router-dom';
 import styled, {keyframes} from 'styled-components';
+import { connect } from 'react-redux';
+import {setPlaylistTitle} from '../store/actions';
 
-const Player = (props) => {
+const Player = ({match,history,playedSong,setPlaylistTitle}) => {
 
     const [isPlaying, setIsPlaying] = useState(false);
     const [play5items, setPlay5items] = useState([]);
     const [playlist, setPlaylist] = useState([]);
     const [playContent, setPlayContent] = useState({});
-    const [audioFile, setaudioFile] = useState(`http://10.58.2.238:8005/content/playcontent/${(props.match.params.id)}`);
+    const [audioFile, setaudioFile] = useState(`http://10.58.2.238:8005/content/playcontent/${(match.params.id)}`);
     const audio = useRef(new Audio(audioFile));
-    const [indexOrder, setindexOrder] = useState((props.match.params.id)-1);
+    const [indexOrder, setindexOrder] = useState((match.params.id)-1);
     const [playBtnPosition, setPlayBtnPosition] = useState(0);
     const [playingSpeed, setPlayingSpeed] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
@@ -65,26 +67,25 @@ const Player = (props) => {
 
     const goBack = () => {
         audio.current.pause();
-        props.history.goBack();
+        history.goBack();
     }
+
     //onClick 되면 배열 위치 바뀌게 하고 transition을 width랑 height에 걸어주기
 
     const changeMapItem = (id) => {
 
         let newArr = [];
         console.log(id);
-
-        setindexOrder(id);
-
-        if(id < 3) {
+        setaudioFile(`http://10.58.2.238:8005/content/playcontent/${id}`);
+       
+        if(id > 0 && id <= 2) {
             newArr = [playlist[playlist.length-1],playlist[playlist.length-2],playlist[0],playlist[1],playlist[2]];
             setPlay5items(newArr);
-        } else if(id >= 3) {
+        } else if(id >= 3 && id <27) {
             newArr = [playlist[id-3],playlist[id-2],playlist[id-1],playlist[id],playlist[id+1]];
             setPlay5items(newArr);
-        } else if(indexOrder >= playlist.length-3){
-            alert("27");
-            newArr = [playlist[indexOrder-2],playlist[indexOrder-1],playlist[indexOrder],playlist[0],playlist[1]];
+        } else if(id >= 27){
+            newArr = [playlist[id-2],playlist[id-1],playlist[id],playlist[0],playlist[1]];
             setPlay5items(newArr);
         } else {
             return;
@@ -94,8 +95,8 @@ const Player = (props) => {
 
     //async await
     const fetchPlaylist = async () => {
-        const playlistData = await axios.get(`http://localhost:3000/Data/Playlist.json`);
-        //const playlistData = await axios(`http://10.58.2.238:8005/content/playlistinfo?play_list_id=1`);
+        //const playlistData = await axios.get(`http://localhost:3000/Data/Playlist.json`);
+        const playlistData = await axios.get(`http://10.58.2.238:8005/content/playlistinfo/1`);
         const playData = playlistData.data.playlist;
         const datalist = playlistData.data.content;
         setPlayContent(playData);
@@ -119,10 +120,10 @@ const Player = (props) => {
         let playlistDt;
 
         if(indexOrder < datalist.length-3){
-            playlistDt = [datalist[indexOrder-2],datalist[indexOrder-1],datalist[indexOrder], datalist[indexOrder+1], datalist[indexOrder+2]];
+            playlistDt = [datalist[datalist.length-1],datalist[datalist.length-2],datalist[indexOrder], datalist[indexOrder+1], datalist[indexOrder+2]];
             setPlay5items(playlistDt);
         } else if(indexOrder >= datalist.length-3) {
-            playlistDt = [datalist[datalist.length-2],datalist[datalist.length-1],datalist[0], datalist[1], datalist[2]];
+            playlistDt = [datalist[indexOrder-2],datalist[indexOrder-1],datalist[indexOrder], datalist[1], datalist[2]];
             setPlay5items(playlistDt);
         } else {
             return;
@@ -194,7 +195,10 @@ const Player = (props) => {
                                             rightVal={rightVal}
                                             index={idx}
                                             array={arr}
-                                            onClick={()=>{changeMapItem(item.id)}}
+                                            onClick={()=>{
+                                                changeMapItem(item.id);
+                                                setPlaylistTitle(item.title);
+                                            }}
                                         >
                                         <DescBoxGradient>
                                             <DescBox>
@@ -546,6 +550,11 @@ const BluredBg = styled.div`
     background-position: center center;
 `;
 
+const mapStateToProps = state => {
+    return {
+        playedSong: state.setPlaylistTitle.playedSong
+    }
+}
 
 
-export default withRouter(Player);
+export default connect(mapStateToProps, {setPlaylistTitle})(Player);
