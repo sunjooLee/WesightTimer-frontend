@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect} from 'react';
 import axios from "axios";
 import { pickIndexStyle } from "./PickIndexStyle";
-import {withRouter} from 'react-router-dom';
+import {withRouter, Link} from 'react-router-dom';
 import styled, {keyframes} from 'styled-components';
 
 const Player = (props) => {
@@ -10,16 +10,13 @@ const Player = (props) => {
     const [play5items, setPlay5items] = useState([]);
     const [playlist, setPlaylist] = useState([]);
     const [playContent, setPlayContent] = useState({});
-    const [audioFile, setaudioFile] = useState(`http://10.58.2.238:8005/content/playcontent/${props.match.params.id}`);
+    const [audioFile, setaudioFile] = useState(`http://10.58.2.238:8005/content/playcontent/${(props.match.params.id)}`);
     const audio = useRef(new Audio(audioFile));
     const [indexOrder, setindexOrder] = useState((props.match.params.id)-1);
     const [playBtnPosition, setPlayBtnPosition] = useState(0);
     const [playingSpeed, setPlayingSpeed] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
     const [runningTime, setRunnigTime] = useState("");
-
-    
-
 
     useEffect(() => {
 
@@ -60,13 +57,10 @@ const Player = (props) => {
         if(!isPlaying){
             setIsPlaying(!isPlaying);
             audio.current.play();
-            console.log("play selected");
         } else {
             setIsPlaying(!isPlaying);
             audio.current.pause();
-            console.log("pause selected")
         }
-        console.log("isPVal :",isPlaying);
     }
 
     const goBack = () => {
@@ -156,9 +150,44 @@ const Player = (props) => {
                             play5items.length && play5items.map((item, idx, arr)=> {
                            
                                     const { zPositionNum, leftVal, rightVal } = pickIndexStyle(idx);
+                                    const pickZIdStyle = (zPositionNum) => {
+
+                                        if(zPositionNum === "3"){
+
+                                            return {
+                                                width: "210px",
+                                                height: "210px",
+                                                zIndex: 1
+                                            };
+
+                                        } else if (zPositionNum === "2") {
+
+                                            return {
+                                                width: "280px",
+                                                height: "280px",
+                                                zIndex: 2
+                                            };
+
+                                        } else {
+
+                                            return {
+                                                width: "420px",
+                                                height: "420px",
+                                                zIndex: 3
+                                            };
+                                        }
+                                    }
+
+                                    const linkToStyle = {
+                                        left: `${leftVal}`,
+                                        right: `${rightVal}`,
+                                        width: pickZIdStyle(zPositionNum).width,
+                                        height: pickZIdStyle(zPositionNum).height,
+                                        zIndex: pickZIdStyle(zPositionNum).zIndex
+                                    }
 
                                     return (
-
+                                        <Link to={`/playlist/${item.id}`} style={linkToStyle}>
                                         <CapitalImg
                                             ZPositionId={zPositionNum}
                                             leftVal={leftVal}
@@ -174,6 +203,7 @@ const Player = (props) => {
                                             </DescBox>
                                         </DescBoxGradient>
                                         </CapitalImg>
+                                        </Link>
                                     );
                             })
                         }
