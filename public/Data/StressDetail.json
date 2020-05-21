@@ -1,0 +1,67 @@
+{
+  "category": {
+    "title": "Managing Stress",
+    "introduction": "The long-term effects of stress can be detrimental to our health and also lead to anxiety and depression. Meditation for stress relief and mindfulness techniques can help to counter these effects by lowering stress hormones and decreasing inflammation in the body.",
+    "musicInfo": {
+      "playtime": "08:06",
+      "title": "Learning To Surrender",
+      "teacher": "Sarah Blondin",
+      "rate": "4.8",
+      "type": "Guided",
+      "activity": "Meditation",
+      "suitableTarget": "Everyone",
+      "plays": "2milion",
+      "musicDescription": "This meditation helps us let go of our worries and fears. It reminds us that we are supported and that life is unfolding just as it should."
+    }
+  },
+  "categoryInfo": [
+    "Stress",
+    "Visualization",
+    "Consciousness",
+    "Stress & Anxiety",
+    "Guided Imagery"
+  ],
+
+  "teacherDetail": {
+    "location": "British Columbia, Canada",
+    "info": "Sarah Blondin is the founder, writer, videographer and podcast creator of 'live awake'. She lives in British Columbia, Canada with her husband and two sons. Her first book 'Heart Minded-How to Hold Yourself and others in Love,' is being published on June 16th. 2020. You can visit her website for more information."
+  },
+
+  "reviewData": {
+    "rate": "4.83",
+    "count": "81,616"
+  },
+
+  "reviews": [
+    {
+      "id": 1,
+      "userName": "Jennifer",
+      "rate": 5,
+      "reviewContent": "I love Sarah so much! Her voice is calming, her words are soothing and evocative of a warm breeze blowing through lavender. I felt such stillness and serenity listening to this meditation for a second time. I plan to share this meditation with others I know who struggle with anxiety and future tripping."
+    },
+    {
+      "id": 2,
+      "userName": "Ashlin",
+      "rate": 5,
+      "reviewContent": "I love Sarah so much! Her voice is calming, her words are soothing and evocative of a warm breeze blowing through lavender. I felt such stillness and serenity listening to this meditation for a second time. I plan to share this meditation with others I know who struggle with anxiety and future tripping."
+    },
+    {
+      "id": 3,
+      "userName": "Mike",
+      "rate": 5,
+      "reviewContent": "I love Sarah so much! Her voice is calming, her words are soothing and evocative of a warm breeze blowing through lavender. I felt such stillness and serenity listening to this meditation for a second time. I plan to share this meditation with others I know who struggle with anxiety and future tripping."
+    },
+    {
+      "id": 4,
+      "userName": "Marko",
+      "rate": 5,
+      "reviewContent": "I love Sarah so much! Her voice is calming, her words are soothing and evocative of a warm breeze blowing through lavender. I felt such stillness and serenity listening to this meditation for a second time. I plan to share this meditation with others I know who struggle with anxiety and future tripping."
+    },
+    {
+      "id": 5,
+      "userName": "Kay",
+      "rate": 5,
+      "reviewContent": "I love Sarah so much! Her voice is calming, her words are soothing and evocative of a warm breeze blowing through lavender. I felt such stillness and serenity listening to this meditation for a second time. I plan to share this meditation with others I know who struggle with anxiety and future tripping."
+    }
+  ]
+}

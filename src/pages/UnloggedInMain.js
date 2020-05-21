@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios';
 import NavWrapper from '../components/Nav';
 import LoginSelector from '../components/LoginSelector';
 import styled from 'styled-components';
@@ -12,6 +13,10 @@ const UnloggedInMain = () => {
         setIsModalOpen(true);
     }
 
+    console.log(facebookLink);
+
+    // console.log("Main.js - isModalOpen : ", isModalOpen)
+    
     return (
         <>
             <ViewDiv>
@@ -20,7 +25,8 @@ const UnloggedInMain = () => {
                     <LoginSelector setIsModalOpen={(state) => setIsModalOpen(state)} isVisible={isModalOpen} />
                     <UnloggedInSec>
                         <LeftLoginBox />
-                        <ImgBox>
+                        <ImgBox >
+                        <A href="https://www.facebook.com/v7.0/dialog/oauth?client_id=268946514245799&redirect_uri=https://10.58.2.238:8001/user/login">Sign up</A>
                             <ImgIns src="https://insighttimer.com/static/media/home_desktop_v1.41c5e3a2.jpg" alt="loginImg" />
                         </ImgBox>
                     </UnloggedInSec>
@@ -31,6 +37,7 @@ const UnloggedInMain = () => {
 }
 
 const LeftLoginBox = () => (
+    
     <LeftLoginCont>
         <Title>
             #1 free app for sleep,<br />
@@ -140,6 +147,9 @@ const WhiteBtn = styled.button`
     letter-spacing: 0.19px;
     padding: 6px 8px;
     position: relative;
+`;
+
+const A = styled.a`
 `;
 
 const Img = styled.img`

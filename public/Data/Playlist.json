@@ -1,93 +1,206 @@
 {
   "playlist": {
-    "playtime": "플레이 리스트 총 재생시간",
-    "category": {
+    "playtime": "13:1:49",
+    "title": "Sleep Essentials",
+    "teacher": "Insight Timer",
+    "describe": "Lie down, get cozy, close your eyes, and let these restful #sleepessentials do the work on guiding you to #dreamland. There's nothing to do, just listen, soften your body, and fall gently to #sleep. #nightynight"
+  },
+  "content": [
+    {
       "id": 1,
-      "title": "Anxiety Relief",
-      "teacher": "Insight Timer",
-      "describe": "In our fast paced world, #anxiety is at an all time high. These practices will help you #befrienddanxiety as you slow things down, regain control of your mind and find #peace in each moment."
+      "title": "Floating To Sleep",
+      "teacher": "Tom Evans",
+      "playtime": "22:57",
+      "imgurl": "https://libraryitems.insighttimer.com/g8x1t3y6m4q9a6n8b8a0u9r9j0y1m0g8r4f6p3v3%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
     },
-
-    "music": [
-      {
-        "id": 1,
-        "title": "Working With Anxiety",
-        "teacher": "Manoj Dias",
-        "playtime": "14 min",
-        "imgUrl": "https://libraryitems.insighttimer.com/k8f0q2v0t5b9r7m2f4r7x1d3h1k5w5v2c8j9z4s3%2Fpictures%2Fsquare_medium.jpeg?alt=media"
-      },
-
-      {
-        "id": 2,
-        "title": "Relieving Anxiety - Feeling Grounded",
-        "teacher": "Bethany Auriel-Hagan",
-        "playtime": "10 min",
-        "imgUrl": "https://libraryitems.insighttimer.com/e1s0e0h4r0z7v9a7c0k9b7e5k9s0b2l0u1d3s8t2%2Fpictures%2Fsquare_medium.jpeg?alt=media"
-      },
-
-      {
-        "id": 3,
-        "title": "Let Go Of Worry And Anxiety",
-        "teacher": "Ellen Hendriksen, PhD",
-        "playtime": "14 min",
-        "imgUrl": "https://libraryitems.insighttimer.com/g7j5e3n9c5x3g9h9t7g7w0g9z4v8e8p5d8j2v5t0%2Fpictures%2Fsquare_medium.jpeg?alt=media"
-      },
-
-      {
-        "id": 4,
-        "title": "Releasing Anxiety",
-        "teacher": "Kate James",
-        "playtime": "18 min",
-        "imgUrl": "https://libraryitems.insighttimer.com/q3q4z2s4n1a1g0c8w7g6c0l2h9r0z8k2r8c9l0f9%2Fpictures%2Fsquare_medium.jpeg?alt=media"
-      },
-
-      {
-        "id": 5,
-        "title": "Working With Anxiety",
-        "teacher": "Judson Brewer",
-        "playtime": "3 min",
-        "imgUrl": "https://libraryitems.insighttimer.com/g2r7f9d8s0j5r7e7g8a9h0g6u4n9k2a0y9r7q6j2%2Fpictures%2Fsquare_medium.jpeg?alt=media"
-      },
-
-      {
-        "id": 6,
-        "title": "Working With Anxiety",
-        "teacher": "Manoj Dias",
-        "playtime": "14 min",
-        "imgUrl": "https://libraryitems.insighttimer.com/k8f0q2v0t5b9r7m2f4r7x1d3h1k5w5v2c8j9z4s3%2Fpictures%2Fsquare_medium.jpeg?alt=media"
-      },
-
-      {
-        "id": 7,
-        "title": "Relieving Anxiety - Feeling Grounded",
-        "teacher": "Bethany Auriel-Hagan",
-        "playtime": "10 min",
-        "imgUrl": "https://libraryitems.insighttimer.com/e1s0e0h4r0z7v9a7c0k9b7e5k9s0b2l0u1d3s8t2%2Fpictures%2Fsquare_medium.jpeg?alt=media"
-      },
-
-      {
-        "id": 8,
-        "title": "Let Go Of Worry And Anxiety",
-        "teacher": "Ellen Hendriksen, PhD",
-        "playtime": "14 min",
-        "imgUrl": "https://libraryitems.insighttimer.com/g7j5e3n9c5x3g9h9t7g7w0g9z4v8e8p5d8j2v5t0%2Fpictures%2Fsquare_medium.jpeg?alt=media"
-      },
-
-      {
-        "id": 9,
-        "title": "Releasing Anxiety",
-        "teacher": "Kate James",
-        "playtime": "18 min",
-        "imgUrl": "https://libraryitems.insighttimer.com/q3q4z2s4n1a1g0c8w7g6c0l2h9r0z8k2r8c9l0f9%2Fpictures%2Fsquare_medium.jpeg?alt=media"
-      },
-
-      {
-        "id": 10,
-        "title": "Working With Anxiety",
-        "teacher": "Judson Brewer",
-        "playtime": "3 min",
-        "imgUrl": "https://libraryitems.insighttimer.com/g2r7f9d8s0j5r7e7g8a9h0g6u4n9k2a0y9r7q6j2%2Fpictures%2Fsquare_medium.jpeg?alt=media"
-      }
-    ]
-  }
+    {
+      "id": 2,
+      "title": "Surrender To The Stillness",
+      "teacher": "Sarah Blondin",
+      "playtime": "30:01",
+      "imgurl": "https://libraryitems.insighttimer.com/m7z2u1f8e0z4d5t8g4h5b3e4y5b8c3c4g3j6f5z2%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 3,
+      "title": "Yoga Nidra For Deeper Sleep",
+      "teacher": "John Siddique",
+      "playtime": "45:10",
+      "imgurl": "https://libraryitems.insighttimer.com/t7r4p8t4s4s4m3w8x0d5u1x4y2e6v9x1c7h2h1k5%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 4,
+      "title": "iRest Yoga Nidra for Deep & Restful Sleep",
+      "teacher": "Ajahn Achalo",
+      "playtime": "20:37",
+      "imgurl": "https://libraryitems.insighttimer.com/b7k7r7e7d3c1z9z1n6j6u3y2l9h6y4c6k6g1a0z3%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 5,
+      "title": "Healing Darkness For Sleep",
+      "teacher": "Tomek Wyczesany",
+      "playtime": "30:15",
+      "imgurl": "https://libraryitems.insighttimer.com/l0r4x8d2n4g8v6j8t8b0h4j2e9w1w9f1m5s7e2x0%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 6,
+      "title": "Completely Relaxed For Sleep",
+      "teacher": "Michael Mackintosh",
+      "playtime": "18:05",
+      "imgurl": "https://libraryitems.insighttimer.com/b3n7n7d4r7n3r7w4g2a8g5g6d4p1m6l9t2s5m7b4%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 7,
+      "title": "Relax & Sleep Well",
+      "teacher": "Sonic Yogi",
+      "playtime": "26:03",
+      "imgurl": "https://libraryitems.insighttimer.com/r2r2v6q6w7y2q5w3d3r3a5t8n8t7s5e4q0a8w1b9%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 8,
+      "title": "Sleep Deep With Binaural Beats",
+      "teacher": "Andrea Wachter",
+      "playtime": "29:59",
+      "imgurl": "https://libraryitems.insighttimer.com/k8f9v1u6t9h9g6u5q9t5b5h2b7j7m5c7r6u8a2y6%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 9,
+      "title": "Yoga Nidra For Restorative Sleep",
+      "teacher": "Kate James",
+      "playtime": "20:03",
+      "imgurl": "https://libraryitems.insighttimer.com/g4s7k4u3t8v4x6u0f1u2e4k0w2n3k6k1z0r9b0s8%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 10,
+      "title": "Rest, Relax & Sleep",
+      "teacher": "Andrew Johnson",
+      "playtime": "24:44",
+      "imgurl": "https://libraryitems.insighttimer.com/h0z6j6k2l0b8g9e6r3p0r3r9x2y1y6n3j6g5h7j1%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 11,
+      "title": "Release Worries For Restful Sleep",
+      "teacher": "Pablo Arellano",
+      "playtime": "17:59",
+      "imgurl": "https://libraryitems.insighttimer.com/g6r2n8d2b4l0v8b5a6k0c9t9s8j9f3y5m4x3q1w1%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 12,
+      "title": "100% Relaxation For Sleep",
+      "teacher": "David Gandelman",
+      "playtime": "17:49",
+      "imgurl": "https://libraryitems.insighttimer.com/w3s6e9s5x2v4m6p4v3d0s4u7z1w4g1x0f2c5b2e2%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 13,
+      "title": "Relax Into Deep Sleep",
+      "teacher": "Meg James",
+      "playtime": "20:00",
+      "imgurl": "https://libraryitems.insighttimer.com/y1t2j2n3e2r9y7x3z3z3f2q7z1t8n4k7g5g0t0u2%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 14,
+      "title": "Fall Asleep With Ocean Waves",
+      "teacher": "Stephan Pende Wormland",
+      "playtime": "39:59",
+      "imgurl": "https://libraryitems.insighttimer.com/t5h9q6s7r7r9p6p0y3w5d3g8j8g0f3y1g3t9n0e3%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 15,
+      "title": "Deep Sleep Guided Meditation",
+      "teacher": "Insight Timer",
+      "playtime": "60:57",
+      "imgurl": "https://libraryitems.insighttimer.com/j4z6g8n4h0y6f5t4u6n7p5t2e9w4c5d4g0n5a9s5%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 16,
+      "title": "Healing Sleep Practice",
+      "teacher": "Manoj Dias",
+      "playtime": "20:55",
+      "imgurl": "https://libraryitems.insighttimer.com/p8h1x5z1h1w1h5h4b0y9d1r7x9p3s2p7q2b8m6v2%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 17,
+      "title": "Soothing Sleep Talkdown To Relieve Stress, Anxiety And Insomnia",
+      "teacher": "Stephan Pende Wormland",
+      "playtime": "43:39",
+      "imgurl": "https://libraryitems.insighttimer.com/v8z9w0b1l2e8p1t3p0b6c1v4c0w2e6d6w1s8d1r3%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 18,
+      "title": "Sweet, Deep Sleep",
+      "teacher": "Vidyamala Burch",
+      "playtime": "22:05",
+      "imgurl": "https://libraryitems.insighttimer.com/z4t5t1f3w0d6e9d5z8z3c7c8z6s8f2c1s7a2q8z3%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 19,
+      "title": "Sleep Deeply With Yoga Nidra",
+      "teacher": "Gale Minchew",
+      "playtime": "34:00",
+      "imgurl": "https://libraryitems.insighttimer.com/j3u8q7a0t1g3a9n6s0h2k1h2e7u9t0z0k5z7s2v6%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 20,
+      "title": "Drift To Sleep",
+      "teacher": "Andy Hobson",
+      "playtime": "22:26",
+      "imgurl": "https://libraryitems.insighttimer.com/z6p8y5m0n2x0z9e2p9m3x4b1r5c8f8n1e7c5k0z2%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 21,
+      "title": "Deep Sleep Meditation",
+      "teacher": "Andrew Johnson",
+      "playtime": "30:32",
+      "imgurl": "https://libraryitems.insighttimer.com/n4e7r9u7a5u8j3n7j1v8y7w8z6c3k4w5e3r3z3m1%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 22,
+      "title": "Sleep Meditation: Awaken to a Clean Slate",
+      "teacher": "Franko Heke",
+      "playtime": "45:07",
+      "imgurl": "https://libraryitems.insighttimer.com/r2f9v0w7d0a4p3n7e0f4r6x7t9t3f9g5n7l0h5s1%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 23,
+      "title": "A Practice To Help You Sleep",
+      "teacher": "Lama Yeshe Rabgye",
+      "playtime": "15:06",
+      "imgurl": "https://libraryitems.insighttimer.com/m8b4j5b6e6r8a8f5h9h4l4d0s1w3d4r7q6x8c8q0%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 24,
+      "title": "Sleep Meditation, With Music",
+      "teacher": "Bodhipaksa",
+      "playtime": "28:39",
+      "imgurl": "https://libraryitems.insighttimer.com/y0e0k7g3x5k9v6b2x6u5z4e4s4e2c4q1y7k3a8j3%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 25,
+      "title": "Effortless Sleep With Yoga Nidra",
+      "teacher": "Giovanni Dienstmann",
+      "playtime": "19:45",
+      "imgurl": "https://libraryitems.insighttimer.com/z5b6q1z5n9x8m2d5p0s8y1z7d9t3z3g3v5h0y2t9%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 26,
+      "title": "Breath Based Body Scan For Sleep",
+      "teacher": "Vidyamala Burch",
+      "playtime": "15:04",
+      "imgurl": "https://libraryitems.insighttimer.com/d7p8y0x6d0r1a8x7n4t6a2v1s1s4u4t3e7v1f8l0%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 27,
+      "title": "Worry Free Sleep",
+      "teacher": "Tom Evans",
+      "playtime": "39:53",
+      "imgurl": "https://libraryitems.insighttimer.com/n8l2b0e1u2a1v1r7n7h9b7v3w2t5m7p4y8g7c9c9%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    },
+    {
+      "id": 28,
+      "title": "Sleep Soundly",
+      "teacher": "Mooji",
+      "playtime": "20:00",
+      "imgurl": "https://libraryitems.insighttimer.com/d9y3g3r4p3z1y4j0g4y5s0b5h2e3x7n5s3u7z1x2%2Fpictures%2Frectangle_xlarge.jpeg?alt=media"
+    }
+  ]
 }

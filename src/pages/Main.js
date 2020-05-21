@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import Nav from "../components/Nav";
 import Card from "./Card";
 import styled from "styled-components";
@@ -58,7 +59,8 @@ const MainContents = () => {
     if (number === 1) {
       setButton(`hidden`);
     }
-  };
+  }
+
   return (
     <MainWrap>
       <Nav />
@@ -221,8 +223,8 @@ const SwiperWrap = styled.section`
   width: 3200px;
   padding-top: 20px;
   display: flex;
-  transform: ${(props) => `translateX(${props.translate}px)`}
-  }`;
+  transform: ${(props) => `translateX(${props.translate}px)`};
+`;
 
 const MainDiv = styled.div`
     padding: 0px 40px;

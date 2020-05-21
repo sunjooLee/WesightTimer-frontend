@@ -6,69 +6,133 @@ import styled, {keyframes} from 'styled-components';
 
 const Player = (props) => {
 
-    const [isBtnClicked, setBtnClicked] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(false);
     const [play5items, setPlay5items] = useState([]);
     const [playlist, setPlaylist] = useState([]);
-    //const [audioFile, setaudioFile] = useState('https://libraryaudio.insighttimer.com/k8f0q2v0t5b9r7m2f4r7x1d3h1k5w5v2c8j9z4s3%2Faudio%2Fstandard_quality.mp3?alt=media');
-    const [audioFile, setaudioFile] = useState('http://10.58.1.171:8005/content');
+    const [playContent, setPlayContent] = useState({});
+    const [audioFile, setaudioFile] = useState(`http://10.58.2.238:8005/content/playcontent/${props.match.params.id}`);
     const audio = useRef(new Audio(audioFile));
     const [indexOrder, setindexOrder] = useState((props.match.params.id)-1);
-    const playSong = () => {
-        
-        if(isBtnClicked === false){
+    const [playBtnPosition, setPlayBtnPosition] = useState(0);
+    const [playingSpeed, setPlayingSpeed] = useState(0);
+    const [currentTime, setCurrentTime] = useState(0);
+    const [runningTime, setRunnigTime] = useState("");
+
+    
+
+
+    useEffect(() => {
+
+        let timer;
+
+        if(isPlaying) {
+
+        timer = setInterval(() => {
+
+            if(currentTime > 0) {
+
+                setCurrentTime(currentTime => currentTime-=1);
+                setPlayingSpeed(playingSpeed => playingSpeed + 1);
+                setPlayBtnPosition(playBtnPosition => playBtnPosition +1);
+
+                let min = parseInt(currentTime/60);
+                let sec = (currentTime%60);
+
+                if(min > 0){
+                    if (sec >0 && sec<10) {
+                        setRunnigTime(`${min}:0${sec}`);
+                    } else {
+                        if(sec <= 0){
+                            sec=60;
+                            setRunnigTime(`${min}:${sec}`);
+                        }
+                        setRunnigTime(`${min}:${sec}`);
+                    }
+                }
+            }   
+        }, 1000); 
+        }
+        return () => clearInterval(timer);
+    }, [isPlaying, currentTime]);
+
+
+    const toggleSong = (isPlaying) => {
+        if(!isPlaying){
+            setIsPlaying(!isPlaying);
             audio.current.play();
-        }
-        setBtnClicked(true);
-        setBtnClicked(!isBtnClicked);
-    }
-
-    const pauseSong = (e) => {
-
-        e.preventDefault();
-        setBtnClicked(!isBtnClicked);
-        if(isBtnClicked === true){
+            console.log("play selected");
+        } else {
+            setIsPlaying(!isPlaying);
             audio.current.pause();
+            console.log("pause selected")
         }
-       
+        console.log("isPVal :",isPlaying);
     }
 
     const goBack = () => {
+        audio.current.pause();
         props.history.goBack();
     }
-
     //onClick 되면 배열 위치 바뀌게 하고 transition을 width랑 height에 걸어주기
 
     const changeMapItem = (id) => {
 
-        console.log("id     :", id);
+        let newArr = [];
+        console.log(id);
+
         setindexOrder(id);
 
-        if(id >= 10 || id<1){
-            setindexOrder(1);
-
-        } else {
-            const newArr = [playlist[id-1],playlist[id],playlist[id-1],playlist[id],playlist[id+1]];
+        if(id < 3) {
+            newArr = [playlist[playlist.length-1],playlist[playlist.length-2],playlist[0],playlist[1],playlist[2]];
             setPlay5items(newArr);
+        } else if(id >= 3) {
+            newArr = [playlist[id-3],playlist[id-2],playlist[id-1],playlist[id],playlist[id+1]];
+            setPlay5items(newArr);
+        } else if(indexOrder >= playlist.length-3){
+            alert("27");
+            newArr = [playlist[indexOrder-2],playlist[indexOrder-1],playlist[indexOrder],playlist[0],playlist[1]];
+            setPlay5items(newArr);
+        } else {
+            return;
         }
        
     }
 
     //async await
     const fetchPlaylist = async () => {
-        const playlistData = await axios(`http://localhost:3000/Data/Playlist.json`);
-        const datalist = playlistData.data.playlist.music;
+        const playlistData = await axios.get(`http://localhost:3000/Data/Playlist.json`);
+        //const playlistData = await axios(`http://10.58.2.238:8005/content/playlistinfo?play_list_id=1`);
+        const playData = playlistData.data.playlist;
+        const datalist = playlistData.data.content;
+        setPlayContent(playData);
         setPlaylist(datalist);
+
+        const time = datalist[indexOrder].playtime.split(":");
+        let timeFixer = 0;
+
+        if(time[1].startsWith("0")){
+            let slicedNum = time[1].slice(1);
+            timeFixer = (Number(time[0]*60)+Number(slicedNum));
+            setRunnigTime(`${time[0]}:${time[1]}`);
+            setCurrentTime(timeFixer);
+
+        } else {
+            timeFixer = (Number((time[0]*60)+Number(time[1])));
+            setRunnigTime(`${time[0]}:${time[1]}`);
+            setCurrentTime(timeFixer);
+        }
+
         let playlistDt;
 
-
-        if(indexOrder <=3){
-            playlistDt = [datalist[datalist.length-2],datalist[datalist.length-1],datalist[indexOrder], datalist[indexOrder+1], datalist[indexOrder+2]];
-            setPlay5items(playlistDt);
-        } else {
+        if(indexOrder < datalist.length-3){
             playlistDt = [datalist[indexOrder-2],datalist[indexOrder-1],datalist[indexOrder], datalist[indexOrder+1], datalist[indexOrder+2]];
             setPlay5items(playlistDt);
-        }
-        
+        } else if(indexOrder >= datalist.length-3) {
+            playlistDt = [datalist[datalist.length-2],datalist[datalist.length-1],datalist[0], datalist[1], datalist[2]];
+            setPlay5items(playlistDt);
+        } else {
+            return;
+        }        
     };
 
     //useEffect 호출 
@@ -90,10 +154,8 @@ const Player = (props) => {
                         <AlbumCoversWrapper>
                         {
                             play5items.length && play5items.map((item, idx, arr)=> {
-
-                                    let zPositionNum = pickIndexStyle(idx).zPositionNum;
-                                    let leftVal = pickIndexStyle(idx).leftVal;
-                                    let rightVal = pickIndexStyle(idx).rightVal;
+                           
+                                    const { zPositionNum, leftVal, rightVal } = pickIndexStyle(idx);
 
                                     return (
 
@@ -118,15 +180,16 @@ const Player = (props) => {
                     </AlbumCoversWrapper>
                     </PlayCoverWrapper>
                     <TotalPlayTime>
-                        07:52:32
+                        {playContent.playtime}
                     </TotalPlayTime>
                     </AlbumCont>
                     </GridWrapper>
                     <PlayerControl>
                         <ControlBar>
-                            <StageBtn />
+                        <ProgressBar isPlaying={playingSpeed}/>
+                            <StageBtn isPlaying={playBtnPosition}/>
                             <StageBar><audio src={audioFile} enckey="241"></audio></StageBar>
-                            <Playtime>14:03</Playtime>
+                            {playlist&&<Playtime>{runningTime}</Playtime>}
                         </ControlBar>
                         <MusicInfoBox>
                             <MusicTitleCont>
@@ -137,9 +200,9 @@ const Player = (props) => {
                             <PlayerControlKit>
                                 <PlayerControlBtn index="1"><svg width="20" height="20" viewBox="0 0 20 20" class="text-white"><path fill="#FFF" fill-rule="nonzero" d="M10.664 3.55a7.59 7.59 0 1 1 0 15.18 7.592 7.592 0 0 1-7.257-5.363.75.75 0 0 1 1.435-.44 6.092 6.092 0 0 0 11.912-1.788 6.09 6.09 0 0 0-6.09-6.089H4.561l1.27 1.27a.75.75 0 0 1-1.06 1.06L2.22 4.83a.75.75 0 0 1 0-1.06l2.55-2.55a.75.75 0 0 1 1.06 1.06L4.56 3.55h6.103z"></path></svg></PlayerControlBtn>
                                 <PlayerControlBtn index="2"><svg width="21" height="24" viewBox="0 0 21 24" class="w-4 sm:w-6"><g fill="#FFF" fill-rule="evenodd" transform="matrix(-1 0 0 1 21 0)"><rect width="4" height="20" x="17" y="1.953" rx="2"></rect><path d="M0 1.763v20.416c0 .553.448 1 1 1 .181 0 .359-.049.514-.142L20 11.953 1.513.904C1.039.621.425.776.142 1.25.049 1.405 0 1.582 0 1.763z"></path></g></svg></PlayerControlBtn>
-                                <PlayerControlBtn index="3" onClick= {!isBtnClicked ? () => playSong() : (e) => pauseSong(e)}>
-                                    {!isBtnClicked && <Svg width="13px" height="14px" viewBox="0 0 13 14" class=" jss989 jss992 relative w-5 h-5 md:w-6 md:h-6"><title>Combined Shape</title><desc>Created with Sketch.</desc><g id="UI-Designs-2019" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Music---Featured-coure" transform="translate(-316.000000, -413.000000)" fill="#fff"><g id="Group-14" transform="translate(17.000000, 252.000000)"><g id="Group-6"><g id="Group-6-Copy-2"><g id="Group-6-Copy-12"><g id="Group-2" transform="translate(15.000000, 161.000000)"><g id="Group-19-Copy" transform="translate(284.000000, 0.000000)"><path d="M0.428571429,1.37789015 L0.428571429,12.6221099 C0.428571429,13.1743946 0.876286679,13.6221099 1.42857143,13.6221099 C1.59216296,13.6221099 1.7532564,13.5819754 1.89772665,13.5052256 L12.4805217,7.88311572 C12.968253,7.62400844 13.1535894,7.01857612 12.8944822,6.53084477 C12.80088,6.35465244 12.656714,6.21048646 12.4805217,6.11688428 L1.89772665,0.494774428 C1.40999531,0.235667151 0.804562986,0.421003577 0.545455709,0.908734922 C0.468705885,1.05320518 0.428571429,1.21429861 0.428571429,1.37789015 Z" id="Combined-Shape"></path></g></g></g></g></g></g></g></g></Svg>}
-                                    {isBtnClicked && <Svg width="20" height="20" viewBox="0 0 20 20" class=" jss994 w-5 h-5 md:w-6 md:h-6"><path fill="#fff" fill-rule="nonzero" d="M3.5 3.5a2 2 0 1 1 4 0v12.705a2 2 0 1 1-4 0V3.5zm9.21 0a2 2 0 1 1 4 0v12.705a2 2 0 1 1-4 0V3.5z"></path></Svg>}
+                                <PlayerControlBtn index="3" onClick={()=>{toggleSong(isPlaying);}}>
+                                    {!isPlaying && <Svg width="13px" height="14px" viewBox="0 0 13 14" class=" jss989 jss992 relative w-5 h-5 md:w-6 md:h-6"><title>Combined Shape</title><desc>Created with Sketch.</desc><g id="UI-Designs-2019" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Music---Featured-coure" transform="translate(-316.000000, -413.000000)" fill="#fff"><g id="Group-14" transform="translate(17.000000, 252.000000)"><g id="Group-6"><g id="Group-6-Copy-2"><g id="Group-6-Copy-12"><g id="Group-2" transform="translate(15.000000, 161.000000)"><g id="Group-19-Copy" transform="translate(284.000000, 0.000000)"><path d="M0.428571429,1.37789015 L0.428571429,12.6221099 C0.428571429,13.1743946 0.876286679,13.6221099 1.42857143,13.6221099 C1.59216296,13.6221099 1.7532564,13.5819754 1.89772665,13.5052256 L12.4805217,7.88311572 C12.968253,7.62400844 13.1535894,7.01857612 12.8944822,6.53084477 C12.80088,6.35465244 12.656714,6.21048646 12.4805217,6.11688428 L1.89772665,0.494774428 C1.40999531,0.235667151 0.804562986,0.421003577 0.545455709,0.908734922 C0.468705885,1.05320518 0.428571429,1.21429861 0.428571429,1.37789015 Z" id="Combined-Shape"></path></g></g></g></g></g></g></g></g></Svg>}
+                                    {isPlaying && <Svg width="20" height="20" viewBox="0 0 20 20" class=" jss994 w-5 h-5 md:w-6 md:h-6"><path fill="#fff" fill-rule="nonzero" d="M3.5 3.5a2 2 0 1 1 4 0v12.705a2 2 0 1 1-4 0V3.5zm9.21 0a2 2 0 1 1 4 0v12.705a2 2 0 1 1-4 0V3.5z"></path></Svg>}
                                 </PlayerControlBtn>
                                 <PlayerControlBtn index="4"><svg width="21" height="24" viewBox="0 0 21 24" class="w-4 sm:w-6"><g fill="#FFF" fill-rule="evenodd"><rect width="4" height="20" x="17" y="1.953" rx="2"></rect><path d="M0 1.763v20.416c0 .553.448 1 1 1 .181 0 .359-.049.514-.142L20 11.953 1.513.904C1.039.621.425.776.142 1.25.049 1.405 0 1.582 0 1.763z"></path></g></svg></PlayerControlBtn>
                                 <PlayerControlBtn index="5"><svg width="20" height="20" viewBox="0 0 20 20" class="text-white"><path fill="#FFF" fill-rule="nonzero" d="M9.59 3.55a7.59 7.59 0 1 0 0 15.18c3.358 0 6.29-2.201 7.258-5.363a.75.75 0 0 0-1.435-.44A6.092 6.092 0 0 1 3.5 11.14 6.09 6.09 0 0 1 9.59 5.05h6.104l-1.27 1.27a.75.75 0 0 0 1.06 1.06l2.55-2.55a.75.75 0 0 0 0-1.06l-2.55-2.55a.75.75 0 0 0-1.06 1.06l1.27 1.27H9.59z"></path></svg></PlayerControlBtn>
@@ -241,9 +304,9 @@ const CapitalImg = styled.div`
         `;
     }
     }}
-    transition-property: transform;
-    transition-duration: 0ms;
-    background-image: ${props => `url(${props.array[props.index].imgUrl})`};
+
+    transition: background-image .3s ease-in-out;
+    background-image: ${props => `url(${props.array[props.index].imgurl})`};
     background-size: cover;
     background-position: 50%;
     border-radius: 20px;
@@ -353,6 +416,15 @@ const ControlBar = styled.div`
     position: relative;
 `;
 
+const ProgressBar = styled.span`
+    left:0;
+    background: #fff;
+    position: absolute;
+    width: ${props => `${props.isPlaying}%`};
+    height: 4px;
+    border-radius: 2px;
+`;
+
 const StageBar = styled.div`
     height: 4px;
     background: #fff;
@@ -367,7 +439,7 @@ const StageBtn = styled.span`
         width: 15px;
         height: 15px;
         top: 7px;
-        left: -15px;
+        left: ${props => `${props.isPlaying}%`};
         right: -15px;
         bottom: -15px;
         content: "";

@@ -127,7 +127,7 @@ const Essentialfull = styled.div`
   margin: 0, auto;
   margin-top: 100px;
   flex: 1;
-  width: 1600px;
+  width: inherit;
   box-sizing: inherit;
   overflow: hidden;
 `;
