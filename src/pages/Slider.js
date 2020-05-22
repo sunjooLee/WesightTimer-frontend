@@ -81,6 +81,7 @@ const Slider = () => {
 };
 
 const Essentialwrap = styled.div`
+  width:1600px;
   position: relative;
   color: #FFFFFF;
 `;
