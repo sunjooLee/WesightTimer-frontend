@@ -19,10 +19,12 @@ const Player = ({match,history,playedSong,setPlaylistTitle}) => {
     const [playingSpeed, setPlayingSpeed] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
     const [runningTime, setRunnigTime] = useState("");
+    const [currentClickedSong, setCurrentClickedSong] = useState([]);
 
     useEffect(() => {
 
         let timer;
+        localStorage.setItem("playedSong", currentClickedSong);
 
         if(isPlaying) {
 
@@ -52,7 +54,7 @@ const Player = ({match,history,playedSong,setPlaylistTitle}) => {
         }, 1000); 
         }
         return () => clearInterval(timer);
-    }, [isPlaying, currentTime]);
+    }, [isPlaying, currentTime, currentClickedSong]);
 
 
     const toggleSong = (isPlaying) => {
@@ -68,6 +70,11 @@ const Player = ({match,history,playedSong,setPlaylistTitle}) => {
     const goBack = () => {
         audio.current.pause();
         history.goBack();
+    }
+
+    const setPlaytitleInLs = (title) => {
+        setPlaylistTitle(title);
+        setCurrentClickedSong([...currentClickedSong, title]);
     }
 
     //onClick 되면 배열 위치 바뀌게 하고 transition을 width랑 height에 걸어주기
@@ -197,7 +204,7 @@ const Player = ({match,history,playedSong,setPlaylistTitle}) => {
                                             array={arr}
                                             onClick={()=>{
                                                 changeMapItem(item.id);
-                                                setPlaylistTitle(item.title);
+                                                setPlaytitleInLs(item.title);
                                             }}
                                         >
                                         <DescBoxGradient>
