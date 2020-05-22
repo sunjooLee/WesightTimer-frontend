@@ -1,4 +1,4 @@
-import React , {useState, useEffect} from 'react';
+import React , {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import Nav from '../components/Nav';
@@ -12,6 +12,13 @@ const StressDetail = () => {
     const [categoryInfo, setCategoryInfo] = useState([]);
     const [teacherDetail, setTeacherDetail] = useState([]);
     const [reviews, setReviews] = useState([]);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [audioFile, setaudioFile] = useState(`http://10.58.2.238:8005/content/playcontent/1`);
+    const audio = useRef(new Audio(audioFile));
+    const [playBtnPosition, setPlayBtnPosition] = useState(0);
+    const [playingSpeed, setPlayingSpeed] = useState(0);
+    const [currentTime, setCurrentTime] = useState(0);
+    const [runningTime, setRunnigTime] = useState("");
 
     const moveLeft = () => {
 
@@ -30,6 +37,16 @@ const StressDetail = () => {
         setTranslateVal(-492);     
     }
 
+    const toggleSong = (isPlaying) => {
+        if(!isPlaying){
+            setIsPlaying(!isPlaying);
+            audio.current.play();
+        } else {
+            setIsPlaying(!isPlaying);
+            audio.current.pause();
+        }
+    }
+
     //async await
   
     useEffect(()=>{
@@ -39,15 +56,22 @@ const StressDetail = () => {
         .then((res) => {
             setMusicInfo(res.musicInfo);
             setCategoryInfo(res.categoryInfo);
+
+            let time = res.musicInfo.playtime.split(":");
+            let timeFixer = 0;
+
+            timeFixer = (Number((time[0]*60)+Number(time[1])));
+            setRunnigTime(`${time[0]}:${time[1]}`);
+            setCurrentTime(timeFixer);
         });
 
-        fetch("http://localhost:3000/Data/TeacherDt.json")
+        fetch("http://10.58.3.50:8000/user/teacher?teacher_id=1")
         .then((res)=> res.json())
         .then((res) => {
             setTeacherDetail(res.teacherDetail);
         });
 
-        fetch("http://localhost:3000/Data/StressData.json")
+        fetch("http://10.58.3.50:8000/content/stressreview?content_id=1")
         .then((res)=> res.json())
         .then((res) => {
             setReviews(res.reviews);
@@ -55,15 +79,71 @@ const StressDetail = () => {
     
     },[]);
 
+    useEffect(() => {
+
+        let timer;
+
+        if(isPlaying) {
+
+        timer = setInterval(() => {
+
+            if(currentTime > 0) {
+
+                setCurrentTime(currentTime => currentTime-=1);
+                setPlayingSpeed(playingSpeed => playingSpeed + 1);
+                setPlayBtnPosition(playBtnPosition => playBtnPosition +1);
+
+                let min = parseInt(currentTime/60);
+                let sec = (currentTime%60);
+
+                if(min > 0){
+                    if (sec >0 && sec<10) {
+                        setRunnigTime(`${min}:0${sec}`);
+                    } else {
+                        if(sec <= 0){
+                            sec=60;
+                            setRunnigTime(`${min}:${sec}`);
+                        }
+                        setRunnigTime(`${min}:${sec}`);
+                    }
+                }
+            }   
+        }, 1000); 
+        }
+        return () => clearInterval(timer);
+    }, [isPlaying, currentTime]);
+
+
     return (
         <div>
             <Nav />
             {musicInfo && 
             <ContentsWrapper>
                 <FirstIntroPg>
+                <Overlay />
                 <PlayerContents>
-                    <Overlay />
-                    <H2>{musicInfo.playtime}</H2>
+                    <H2>{runningTime}</H2>
+                    <PlayerControlKit>
+                                <PlayerControlBtn index="1"><svg width="20" height="20" viewBox="0 0 20 20" class="text-white"><path fill="#FFF" fill-rule="nonzero" d="M10.664 3.55a7.59 7.59 0 1 1 0 15.18 7.592 7.592 0 0 1-7.257-5.363.75.75 0 0 1 1.435-.44 6.092 6.092 0 0 0 11.912-1.788 6.09 6.09 0 0 0-6.09-6.089H4.561l1.27 1.27a.75.75 0 0 1-1.06 1.06L2.22 4.83a.75.75 0 0 1 0-1.06l2.55-2.55a.75.75 0 0 1 1.06 1.06L4.56 3.55h6.103z"></path></svg></PlayerControlBtn>
+                                <PlayerControlBtn index="2"><svg width="21" height="24" viewBox="0 0 21 24" class="w-4 sm:w-6"><g fill="#FFF" fill-rule="evenodd" transform="matrix(-1 0 0 1 21 0)"><rect width="4" height="20" x="17" y="1.953" rx="2"></rect><path d="M0 1.763v20.416c0 .553.448 1 1 1 .181 0 .359-.049.514-.142L20 11.953 1.513.904C1.039.621.425.776.142 1.25.049 1.405 0 1.582 0 1.763z"></path></g></svg></PlayerControlBtn>
+                                <PlayerControlBtn index="3" onClick={()=>{toggleSong(isPlaying);}}>
+                                    {!isPlaying && <Svg width="13px" height="14px" viewBox="0 0 13 14" class=" jss989 jss992 relative w-5 h-5 md:w-6 md:h-6"><title>Combined Shape</title><desc>Created with Sketch.</desc><g id="UI-Designs-2019" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Music---Featured-coure" transform="translate(-316.000000, -413.000000)" fill="#fff"><g id="Group-14" transform="translate(17.000000, 252.000000)"><g id="Group-6"><g id="Group-6-Copy-2"><g id="Group-6-Copy-12"><g id="Group-2" transform="translate(15.000000, 161.000000)"><g id="Group-19-Copy" transform="translate(284.000000, 0.000000)"><path d="M0.428571429,1.37789015 L0.428571429,12.6221099 C0.428571429,13.1743946 0.876286679,13.6221099 1.42857143,13.6221099 C1.59216296,13.6221099 1.7532564,13.5819754 1.89772665,13.5052256 L12.4805217,7.88311572 C12.968253,7.62400844 13.1535894,7.01857612 12.8944822,6.53084477 C12.80088,6.35465244 12.656714,6.21048646 12.4805217,6.11688428 L1.89772665,0.494774428 C1.40999531,0.235667151 0.804562986,0.421003577 0.545455709,0.908734922 C0.468705885,1.05320518 0.428571429,1.21429861 0.428571429,1.37789015 Z" id="Combined-Shape"></path></g></g></g></g></g></g></g></g></Svg>}
+                                    {isPlaying && <Svg width="20" height="20" viewBox="0 0 20 20" class=" jss994 w-5 h-5 md:w-6 md:h-6"><path fill="#fff" fill-rule="nonzero" d="M3.5 3.5a2 2 0 1 1 4 0v12.705a2 2 0 1 1-4 0V3.5zm9.21 0a2 2 0 1 1 4 0v12.705a2 2 0 1 1-4 0V3.5z"></path></Svg>}
+                                </PlayerControlBtn>
+                                <PlayerControlBtn index="4"><svg width="21" height="24" viewBox="0 0 21 24" class="w-4 sm:w-6"><g fill="#FFF" fill-rule="evenodd"><rect width="4" height="20" x="17" y="1.953" rx="2"></rect><path d="M0 1.763v20.416c0 .553.448 1 1 1 .181 0 .359-.049.514-.142L20 11.953 1.513.904C1.039.621.425.776.142 1.25.049 1.405 0 1.582 0 1.763z"></path></g></svg></PlayerControlBtn>
+                                <PlayerControlBtn index="5"><svg width="20" height="20" viewBox="0 0 20 20" class="text-white"><path fill="#FFF" fill-rule="nonzero" d="M9.59 3.55a7.59 7.59 0 1 0 0 15.18c3.358 0 6.29-2.201 7.258-5.363a.75.75 0 0 0-1.435-.44A6.092 6.092 0 0 1 3.5 11.14 6.09 6.09 0 0 1 9.59 5.05h6.104l-1.27 1.27a.75.75 0 0 0 1.06 1.06l2.55-2.55a.75.75 0 0 0 0-1.06l-2.55-2.55a.75.75 0 0 0-1.06 1.06l1.27 1.27H9.59z"></path></svg></PlayerControlBtn>
+                            </PlayerControlKit>
+                            <PlaylistControlKit>
+                                <BtnWrapper>
+                                    <PlaylistControlBtn><svg width="36" height="24" viewBox="0 0 36 24"><g fill="none" fill-rule="evenodd" stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" opacity="0.298"><path d="M0 14.545L0 20 11.294 20" transform="translate(2 2)"></path><g><path d="M0 0L0 5.455 11.294 5.455" transform="translate(2 2) rotate(180 16 2.727)"></path><path d="M20.706 0L20.706 5.455 32 5.455" transform="translate(2 2) rotate(180 16 2.727) matrix(-1 0 0 1 52.706 0)"></path></g><path d="M20.706 14.545L20.706 20 32 20" transform="translate(2 2) matrix(-1 0 0 1 52.706 0)"></path></g></svg></PlaylistControlBtn>
+                                    <PlaylistControlBtn><svg width="27" height="24" viewBox="0 0 27 24" class="opacity-25 sm:opacity-100 h-4 sm:h-6"><g fill="none" fill-rule="evenodd"><g stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"><path d="M0 11.191L7.443 11.191M0 1.562L7.443 1.562M0 20.82L20.555 20.82" transform="translate(2 1) translate(0 .692)"></path></g><path fill="#FFF" d="M14.4 1.137v10.618c0 .663.537 1.2 1.2 1.2.252 0 .498-.08.703-.227l7.35-5.31c.538-.387.659-1.137.27-1.674-.074-.104-.165-.196-.27-.27l-7.35-5.31c-.538-.388-1.288-.267-1.676.27-.148.205-.227.45-.227.703z" transform="translate(2 1)"></path></g></svg></PlaylistControlBtn>
+                                </BtnWrapper>
+                            </PlaylistControlKit>
+                            <ControlBar>
+                        <ProgressBar isPlaying={playingSpeed}/>
+                            <StageBtn isPlaying={playBtnPosition}/>
+                            <StageBar><audio src={audioFile} enckey="241"></audio></StageBar>
+                        </ControlBar>
                 </PlayerContents>
                 <AppIntro><img src={AppImg}/></AppIntro>
                 </FirstIntroPg>
@@ -161,7 +241,7 @@ const StressDetail = () => {
                         {item.username}
                     </DivUserName>
                     <DivDate>
-                        May 18 2020
+                        {item.write_date.substring(0,10)}
                     </DivDate>
                     </DivCont>
                     <StarsDiv>
@@ -185,6 +265,100 @@ const StressDetail = () => {
     )
 }
 
+const StageBar = styled.div`
+    height: 4px;
+    background: #fff;
+    width: inherit;
+    opacity: 0.3;
+    margin: 6px 0px;
+    position: relative;
+`;
+
+const StageBtn = styled.span`
+        opacity: 1;
+        width: 15px;
+        height: 15px;
+        top: 7px;
+        left: ${props => `${props.isPlaying}%`};
+        right: -15px;
+        bottom: -15px;
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        background-color: #fff;
+`;
+
+const ControlBar = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    position: relative;
+    position: absolute;
+    bottom: 20%;
+    width: 100%;
+
+`;
+
+const ProgressBar = styled.span`
+    left:0;
+    background: #fff;
+    position: absolute;
+    width: ${props => `${props.isPlaying}%`};
+    height: 4px;
+    border-radius: 2px;
+`;
+
+const PlayerControlBtn = styled.button`
+    width: 96px;
+    height: 64px;
+    background: transparent;
+    border:0;
+    border-style: none;
+    padding: ${props => {
+        if((props.index === "1") || (props.index=== "5")){
+            return `12px`;
+        }else{
+            return `0`;
+        }
+    }   
+    };
+`;
+
+const PlayerControlKit = styled.div`
+    flex-basis: 33.33333%;
+    flex: 1;
+    height: 64px;
+    display: flex;
+    position: absolute;
+    bottom: 20px;
+    left: 30%;
+`;
+
+const PlaylistControlKit = styled.div`
+    flex: 1;
+    flex-basis: 33.33333%;
+    height: 64px;
+    display: flex;
+`;
+
+const BtnWrapper = styled.div`
+    margin-left: auto;
+    position: absolute;
+    bottom: 20px;
+    left: 90%;
+`;
+
+const PlaylistControlBtn = styled.button`
+    margin-left: auto;
+    width: 64px;
+    height: 64px;
+    border: 0;
+    border-style: none;
+    background: transparent;
+`;
+
 const ContentsWrapper = styled.div`
     width: 100vw;
     display:flex;
@@ -207,7 +381,7 @@ const PlayerContents = styled.div`
     background-image: url(https://libraryitems.insighttimer.com/b0r0t1e8f7l7h5w0r8d5v1e8l7q9w2k5j1m2w1f1%2Fpictures%2Frectangle_xlarge.jpeg?alt=media);
     background-size: cover;
     background-position-y: 25%;
-    position:relative;
+    position:relative;    
 `;
 
 const Overlay = styled.div`
@@ -217,6 +391,7 @@ const Overlay = styled.div`
     bottom: 0;
     background-color: rgba(0,0,0,0.05);
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 70%, rgba(24, 24, 24, 0.6) 100%);
+
 `;
 
 const H2 = styled.h2`
@@ -507,6 +682,7 @@ const ReviewSlider = styled.div`
     display: flex;
     height: inherit;
     transform: translateX(${props => props.moveSlider}px);
+    transition: transform 0.4s ease-out;
 `;
 
 const Review = styled.div`
@@ -586,6 +762,7 @@ const LastDiv = styled.div`
     margin-top: 6rem;
     margin-bottom: 6rem;
 `;
+
 
 export default StressDetail;
 
