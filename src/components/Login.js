@@ -42,12 +42,14 @@ const Login = (props) => {
             .then((response) => {
                 if (response.token_issued) {
                     localStorage.setItem("token", response.token_issued);
-                    props.history.push("/main")
+                    localStorage.setItem("userName", response.name);
+                    localStorage.setItem("userMail", response.email);
+                    props.history.push("/main");
                 }
             })
     }
 
-
+               
     return (
         <ModalArea>
             <Contents>

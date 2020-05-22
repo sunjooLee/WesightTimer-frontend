@@ -14,6 +14,8 @@ const MyPage = ({playedSong, isClicked, handleModal}) => {
         console.log("로그아웃");
     }
 
+    const PlayedSongListArr = localStorage.getItem("playedSong").split(",");
+
     return (
         <>
             <Overlay onClick={() => onClickModal(false)} />
@@ -26,7 +28,7 @@ const MyPage = ({playedSong, isClicked, handleModal}) => {
                     </MyInfo>
                 </TopArea>
                 <MyLists>
-                    {playedSong.map(song=>(
+                    {PlayedSongListArr.map(song=>(
                         <List>{song}</List>
                     ))}
                     {/* <List>My Courses</List>

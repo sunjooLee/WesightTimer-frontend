@@ -9,7 +9,7 @@ const initialState = {
 
 const setPlaylistTitle = (state=initialState, action) => {
     switch(action.type){
-        case types.SET_PLAYLIST_TITLE: return {...state, playedSong: action.payload.playedSong};
+        case types.SET_PLAYLIST_TITLE: return {...state, playedSong: [...state.playedSong,action.payload.playedSong]};
         default: return state;
     }
 };
