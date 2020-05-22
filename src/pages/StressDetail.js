@@ -34,7 +34,7 @@ const StressDetail = () => {
   
     useEffect(()=>{
 
-        fetch("http://localhost:3000/Data/MusicInfo.json")
+        fetch("http://10.58.3.50:8000/content/detail?content_id=1")
         .then((res)=> res.json())
         .then((res) => {
             setMusicInfo(res.musicInfo);

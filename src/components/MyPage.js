@@ -1,17 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
+import {connect} from 'react-redux';
 
-const MyPage = (props) => {
+const MyPage = ({playedSong, isClicked, handleModal}) => {
 
-    const clicked = props.isClicked;
-    const onClickModal = props.handleModal;
+    console.log("recent  ", playedSong)
+
+    const clicked = isClicked;
+    const onClickModal = handleModal;
 
     const logoutHandler = () => {
         localStorage.removeItem('token');
         console.log("로그아웃");
     }
-
-    console.log("aaaaaa", clicked);
 
     return (
         <>
@@ -25,17 +26,21 @@ const MyPage = (props) => {
                     </MyInfo>
                 </TopArea>
                 <MyLists>
-                    <List>My Courses</List>
-                    <List>My Bookmarks</List>
+                    {playedSong.map(song=>(
+                        <List>{song}</List>
+                    ))}
+                    {/* <List>My Courses</List>
+                    <List></List>
                     <List>My Playlists</List>
                     <List>My Profile</List>
-                    <List>My Subscription</List>
+                    <List>My Subscription</List> */}
                     <Logout onClick={() => logoutHandler()}>Logout</Logout>
                 </MyLists>
             </Container>
         </>
     )
 }
+
 
 const Overlay = styled.div`               
     width: 100vw;
@@ -122,4 +127,10 @@ const Logout = styled.li`
     cursor: pointer;
 `;
 
-export default MyPage;
+const mapStateToProps = state => {
+    return {
+        playedSong: state.setPlaylistTitle.playedSong
+    }
+}
+
+export default connect(mapStateToProps)(MyPage);

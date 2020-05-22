@@ -13,7 +13,7 @@ const ListedPlayer = (props) => {
     //async await
     const fetchPlaylist = async () => {
             //const playlistData = await axios.get(`http://10.58.2.238:8005/content/playlistinfo?play_list_id=1`);
-            const playlistData = await axios.get(`http://localhost:3000/Data/Playlist.json`);
+            const playlistData = await axios.get(`http://10.58.2.238:8005/content/playlistinfo/1`);
             setCategory(playlistData.data.playlist);
             setPlaylist(playlistData.data.content);
     };
@@ -22,6 +22,10 @@ const ListedPlayer = (props) => {
     useEffect(() => {
         fetchPlaylist();
     }, []);
+
+    const addRecentSong = ({}) => {
+        
+    }
 
     return (
         <ListedPlayerDiv>
@@ -61,6 +65,7 @@ const ListedPlayer = (props) => {
                     <Link to={`/playlist/${item.id}`}>
                     <Playlist onClick={()=>{
                         setPlayitem(playitem);
+                        addRecentSong(item.title);
                         }}>
                         <PrImg src= {item.imgurl} alt="playlist image"/>
                         <TitleBox>
