@@ -60,9 +60,18 @@ const StressDetail = () => {
             let time = res.musicInfo.playtime.split(":");
             let timeFixer = 0;
 
-            timeFixer = (Number((time[0]*60)+Number(time[1])));
-            setRunnigTime(`${time[0]}:${time[1]}`);
-            setCurrentTime(timeFixer);
+            if(time[1].startsWith("0")){
+                let slicedNum = time[1].slice(1);
+                timeFixer = (Number(time[0]*60)+Number(slicedNum));
+                setRunnigTime(`${time[0]}:${time[1]}`);
+                setCurrentTime(timeFixer);
+    
+            } else {
+                timeFixer = (Number((time[0]*60)+Number(time[1])));
+                setRunnigTime(`${time[0]}:${time[1]}`);
+                setCurrentTime(timeFixer);
+            }
+    
         });
 
         fetch("http://10.58.3.50:8000/user/teacher?teacher_id=1")
