@@ -367,7 +367,7 @@ const PlayerContents = styled.div`
     background-color: rgb(200,200,200);
     border-radius: .75rem;
     height: 621.56px;
-    background-image: url(https://libraryitems.insighttimer.com/b0r0t1e8f7l7h5w0r8d5v1e8l7q9w2k5j1m2w1f1%2Fpictures%2Frectangle_xlarge.jpeg?alt=media);
+    background-image: url(https://libraryitems.insighttimer.com/b3n7n7d4r7n3r7w4g2a8g5g6d4p1m6l9t2s5m7b4%2Fpictures%2Frectangle_xlarge.jpeg?alt=media);
     background-size: cover;
     background-position-y: 25%;
     position:relative;    
@@ -528,8 +528,8 @@ const TeacherImg = styled.div`
     background-size: cover;
     border-radius: 4px;
     background-position: 50%;
-    background-image: url(http://publicdata.insighttimer.com/publisher_data/pictures/000/000/811/large/P4E8v1s5X1w9a4a3s9k8B1Z0V4C2y9Z6N3d4N6v7M5Z3p4g2c0d0s8E6L8N7W3s7Q6b6u1p0w0E7b6f4R8E9L3Q7w4g1e8s5w9W1-v6.jpg);
-`;
+    background-image: url(http://publicdata.insighttimer.com/publisher_data/pictures/000/003/166/large/J1F2K4G7p1r1N7a0J3n1e8r8N6A8A6L1r3f4s8p6z9X1f6v4u3G3v1w5j6a5U5r4W6M9C8k9Q1L2T8m5G3k3q8a1S6L9v7d3y8Y7-v3.jpg);
+    `;
 
 const TeacherDesc = styled.div`
     padding: 10px;

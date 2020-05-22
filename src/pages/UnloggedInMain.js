@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-<<<<<<< HEAD
-import UnloggedNav from '../components/UnloggedNav';
-=======
 import UnloggdeNav from '../components/UnloggdeNav';
->>>>>>> fce223c... 로그인 후 회원 정보 가져오기 완료
 import LoginSelector from '../components/LoginSelector';
 import styled from 'styled-components';
 import { facebookLink } from '../config';
@@ -16,24 +12,17 @@ const UnloggedInMain = () => {
         setIsModalOpen(true);
     }
 
-    console.log(facebookLink);
-
     // console.log("Main.js - isModalOpen : ", isModalOpen)
 
     return (
         <>
             <ViewDiv>
                 <MainDiv>
-<<<<<<< HEAD
-                    <UnloggedNav onClickFromMain={() => setIsModalOpen(true)} />
-=======
                     <UnloggdeNav onClickFromMain={() => setIsModalOpen(true)} />
->>>>>>> fce223c... 로그인 후 회원 정보 가져오기 완료
                     <LoginSelector setIsModalOpen={(state) => setIsModalOpen(state)} isVisible={isModalOpen} />
                     <UnloggedInSec>
                         <LeftLoginBox />
                         <ImgBox >
-                            {/* <A href="https://www.facebook.com/v7.0/dialog/oauth?client_id=268946514245799&redirect_uri=https://10.58.2.238:8001/user/login">Sign up</A> */}
                             <ImgIns src="https://insighttimer.com/static/media/home_desktop_v1.41c5e3a2.jpg" alt="loginImg" />
                         </ImgBox>
                     </UnloggedInSec>

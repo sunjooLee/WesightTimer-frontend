@@ -41,6 +41,7 @@ const MainContents = () => {
   const [number, setNumber] = useState(0);
   const [translate, setTranslate] = useState(0);
   const [button, setButton] = useState(`hidden`);
+  
   const handleClickRight = () => {
     setNumber(number + 1);
     setTranslate(translate - 300.45);

@@ -45,11 +45,7 @@ const Login = (props) => {
                     localStorage.setItem("token", response.token_issued);
                     localStorage.setItem("userName", response.name);
                     localStorage.setItem("userMail", response.email);
-<<<<<<< HEAD
-                    props.history.push("/main");
-=======
                     props.history.push("/main")
->>>>>>> fce223c... 로그인 후 회원 정보 가져오기 완료
                 }
             })
     }

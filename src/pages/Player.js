@@ -25,7 +25,6 @@ const Player = ({match,history,playedSong,setPlaylistTitle}) => {
 
         let timer;
         localStorage.setItem("playedSong", currentClickedSong);
-
         if(isPlaying) {
 
         timer = setInterval(() => {
@@ -54,6 +53,7 @@ const Player = ({match,history,playedSong,setPlaylistTitle}) => {
         }, 1000); 
         }
         return () => clearInterval(timer);
+      
     }, [isPlaying, currentTime, currentClickedSong]);
 
 

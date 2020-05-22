@@ -98,6 +98,7 @@ const Nav = styled.div`
   max-width: 0 auto;
   width: 100%;  
   position: relative;
+  
 `;
 
 const MuitoolWrapper = styled.div`
