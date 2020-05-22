@@ -10,10 +10,19 @@ const MyPage = ({ playedSong, isClicked, handleModal, props }) => {
     const clicked = isClicked;
     const onClickModal = handleModal;
 
+    const userName = localStorage.getItem('userName');
+    const userMail = localStorage.getItem('userMail');
+
     const logoutHandler = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('userName');
+        localStorage.removeItem('userMail');
         console.log("로그아웃");
+<<<<<<< HEAD
         props.history.push("/");
+=======
+        props.history.push("/")
+>>>>>>> fce223c... 로그인 후 회원 정보 가져오기 완료
     }
 
     const PlayedSongListArr = localStorage.getItem("playedSong").split(",");
@@ -25,8 +34,8 @@ const MyPage = ({ playedSong, isClicked, handleModal, props }) => {
                 <TopArea>
                     <Icon />
                     <MyInfo>
-                        <Name>chodanbi</Name>
-                        <Email>danbiicho@gmail.com</Email>
+                        <Name>{userName}</Name>
+                        <Email>{userMail}</Email>
                     </MyInfo>
                 </TopArea>
                 <MyLists>
@@ -131,6 +140,7 @@ const Logout = styled.li`
     cursor: pointer;
 `;
 
+<<<<<<< HEAD
 const mapStateToProps = state => {
     return {
         playedSong: state.setPlaylistTitle.playedSong
@@ -138,3 +148,6 @@ const mapStateToProps = state => {
 }
 
 export default withRouter(connect(mapStateToProps)(MyPage));
+=======
+export default withRouter(MyPage);
+>>>>>>> fce223c... 로그인 후 회원 정보 가져오기 완료

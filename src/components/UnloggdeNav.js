@@ -1,25 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
-import NavHover from '../components/NavHover';
-import MyPage from '../components/MyPage';
+import NavHover from './NavHover';
+import MyPage from './MyPage';
 
-const NavWrapper = (props) => {
+const UnloggdeNav = (props) => {
 
   const [activeTabId, setActiveTabId] = useState(1);
   const [hoveredNav, setHoveredNav] = useState(false);
   const [existToken, SetExistToken] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const accessToken = localStorage.getItem('token');
-  const userName = localStorage.getItem('userName');
-  const userMail = localStorage.getItem('userMail');
   console.log("Modal", isModalOpen);
 
   useEffect(() => {
-
-
+    console.log("props", props)
+    const accessToken = localStorage.getItem('token');
     console.log("token -> ", accessToken);
-    console.log("userName -> ", userName);
     if (accessToken === null) {
       console.log("aaaa");
     } else if (accessToken.length !== 0) {
@@ -68,18 +63,9 @@ const NavWrapper = (props) => {
                 <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
               </IconSvg>
               <ShowButton>
-                {!existToken ?
-                  <Button onClick={props.onClickFromMain} isTokenExist={existToken}>
-                    <Span1>Sign In</Span1>
-                  </Button> : <LoginedButton>
-                    <Icon />
-                    <IdArea>
-                      {userName}
-                      <Pointer onClick={() => setIsModalOpen(true)}>
-                        <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path>
-                      </Pointer>
-                    </IdArea>
-                  </LoginedButton>}
+                <Button onClick={props.onClickFromMain}>
+                  <Span1>Sign In</Span1>
+                </Button>
               </ShowButton>
             </MuiSvgIcondiv>
           </FloatRight>
@@ -122,7 +108,7 @@ const FloatLeft = styled.div`
 const MuiSvgIcondiv = styled.div`
   display: flex;
   //width: 165px;
-  width: 214px;
+  width: 204px;
   height: 48px;
   align-items: center;
 `;
@@ -178,7 +164,7 @@ const IconSvg2 = styled.svg`
     `;
 
 const IconSvg = styled.svg`
-  width: 38px;
+  width: 48px;
   height: 30px;
   margin-right: 8px;
   padding: 10px 0 0 10px; 
@@ -190,7 +176,7 @@ const ShowButton = styled.div`
 `;
 
 const LoginedButton = styled.div`
-  width: 160px;
+  width: 148px;
   height: 32px;
   display: flex;
   align-items: center;
@@ -198,16 +184,16 @@ const LoginedButton = styled.div`
 `;
 
 const Icon = styled.div`
-  width: 42px;
+  width: 32px;
   height: 32px;
-  margin: 0 8px 0 0;
+  margin: 0 8px;
   background-image: url("https://insighttimer.com/static/media/default-user.feb92f46.svg");  
   background-size: cover;
   box-sizing: border-box;
 `;
 
 const IdArea = styled.div`
-  width: 150px;
+  width: 100px;
   height: 25.5px;
   display: flex;
   align-items: center;
@@ -292,7 +278,7 @@ const UserInfo = styled.div`
 `;
 
 const UserIcon = styled.div`
-  width: 42px;
+  width: 32px;
   height: 32px;
   margin-right: 8px;
   display: flex;
@@ -316,5 +302,5 @@ const Arrow = styled.svg`
   align-items: center;
 `;
 
-export default NavWrapper;
+export default UnloggdeNav;
 
