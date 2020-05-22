@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
 const cardDatas = [
@@ -40,6 +41,16 @@ const NavHover = (props) => {
     const hovered = props.isHovered;
     const onMouseLeave = props.onMouseLeave;
 
+    const goPlaylist = () => {
+        props.history.push("/playlistpage");
+    }
+
+    const selectCategory = (i) => {
+        if (i === 2) {
+            props.history.push("/stress");
+        }
+    }
+
     return (
         <>
             <ViewArea isHovered={hovered}>
@@ -61,7 +72,7 @@ const NavHover = (props) => {
                         </SeeAll>
                     </TextContainer>
                     <ImgContainer>
-                        <Playlists>
+                        <Playlists onClick={() => goPlaylist()}>
                             <PlaylistsImg src="https://insighttimer.com/static/media/playlists-menu.63bcbf99.png" />
                             <PlaylistsText>
                                 <ImgText>Intoducing</ImgText>
@@ -69,9 +80,10 @@ const NavHover = (props) => {
                             </PlaylistsText>
                         </Playlists>
                         <Cardlists>
-                            {cardDatas.map(data => {
+                            {cardDatas.map((data, i) => {
                                 return (
-                                    <Card url={data.imageURL} >
+
+                                    <Card url={data.imageURL} onClick={() => selectCategory(i)}>
                                         <CardLabel>
                                             <CardSubTitle>{data.description}</CardSubTitle>
                                             <CardTitle>{data.title}</CardTitle>
@@ -79,7 +91,7 @@ const NavHover = (props) => {
                                     </Card>
                                 );
                             }
-                            )}
+                            )})
                         </Cardlists>
                     </ImgContainer>
                 </HoverContainer >
@@ -261,4 +273,4 @@ const CardTitle = styled.div`
     color: #FFFFFF;
 `;
 
-export default NavHover;
+export default withRouter(NavHover);

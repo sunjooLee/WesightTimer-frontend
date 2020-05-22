@@ -1,8 +1,9 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-const MyPage = ({playedSong, isClicked, handleModal}) => {
+const MyPage = ({ playedSong, isClicked, handleModal, props }) => {
 
     console.log("recent  ", playedSong)
 
@@ -12,6 +13,7 @@ const MyPage = ({playedSong, isClicked, handleModal}) => {
     const logoutHandler = () => {
         localStorage.removeItem('token');
         console.log("로그아웃");
+        props.history.push("/");
     }
 
     const PlayedSongListArr = localStorage.getItem("playedSong").split(",");
@@ -28,7 +30,7 @@ const MyPage = ({playedSong, isClicked, handleModal}) => {
                     </MyInfo>
                 </TopArea>
                 <MyLists>
-                    {PlayedSongListArr.map(song=>(
+                    {PlayedSongListArr.map(song => (
                         <List>{song}</List>
                     ))}
                     {/* <List>My Courses</List>
@@ -135,4 +137,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(MyPage);
+export default withRouter(connect(mapStateToProps)(MyPage));

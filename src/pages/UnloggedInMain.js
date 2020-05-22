@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-import NavWrapper from '../components/Nav';
+import UnloggedNav from '../components/UnloggedNav';
 import LoginSelector from '../components/LoginSelector';
 import styled from 'styled-components';
-import NavHover from '../components/NavHover';
 import { facebookLink } from '../config';
 
 const UnloggedInMain = () => {
@@ -21,7 +20,7 @@ const UnloggedInMain = () => {
         <>
             <ViewDiv>
                 <MainDiv>
-                    <NavWrapper onClickFromMain={() => setIsModalOpen(true)} />
+                    <UnloggedNav onClickFromMain={() => setIsModalOpen(true)} />
                     <LoginSelector setIsModalOpen={(state) => setIsModalOpen(state)} isVisible={isModalOpen} />
                     <UnloggedInSec>
                         <LeftLoginBox />

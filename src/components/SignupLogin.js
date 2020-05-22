@@ -77,7 +77,7 @@ const SignupLogin = () => {
                 <NameText>Full Name</NameText>
                 <InputName onChange={(e) => setnameInput(e.target.value)} />
                 <PasswordText>Create password</PasswordText>
-                <InputPassword placeholder="Minimum of 6 characters" onChange={(e) => setPasswordInput(e.target.value)} />
+                <InputPassword type="password" placeholder="Minimum of 6 characters" onChange={(e) => setPasswordInput(e.target.value)} />
                 <Validation>{loginMessage}</Validation>
                 <LoginButton onClick={handle}>Create account</LoginButton>
             </Contents>
