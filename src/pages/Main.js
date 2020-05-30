@@ -4,6 +4,7 @@ import Nav from "../components/Nav";
 import Card from "./Card";
 import styled from "styled-components";
 import Slider from "./Slider";
+import Scroll from "./Scroll";
 import SecondCard from "../components/SecondCard";
 import Thirddata from "../components/Thirddata";
 import NavHover from '../components/NavHover';
@@ -113,18 +114,12 @@ const MainContents = () => {
       <Slider />
       <Slider />
       <Slider />
+      <Scroll />
     </MainWrap>
   );
 };
 
-const Essentialwrap = styled.div`
-  position: relative;
-`;
 
-const Js23wfull = styled.span`
-  font-family: ProximaNovaBold;
-  font-size: 27px;
-`;
 
 const MainWrap = styled.div`
   display: flex;
@@ -133,40 +128,6 @@ const MainWrap = styled.div`
   align-items: center;
 `;
 
-const NextButton = styled.button`
-  top: 260px;
-  right: 15px;
-  border: 1px solid black;
-  width: 47px;
-  height: 47px;
-  position: absolute;
-  background-color: white;
-  border-radius: 20px;
-  z-index: 200;
-`;
-
-const ButtonLabel = styled.div``;
-
-const PrevButton = styled.button`
-  top: 265px;
-  left: -20px;
-  border: 1px solid black;
-  width: 47px;
-  height: 47px;
-  position: absolute;
-  z-index: 200;
-  border-radius: 20px;
-  background-color: white;
-`;
-
-const Essentialfull = styled.div`
-  margin: 0, auto;
-  margin-top: 100px;
-  flex: 1;
-  width: 1600px;
-  box-sizing: inherit;
-  overflow: hidden;
-`;
 
 const Library = styled.span`
   display: inline-block;
@@ -218,13 +179,6 @@ const ContentsWrap = styled.section`
 `;
 
 
-const SwiperWrap = styled.section`
-  width: 3200px;
-  padding-top: 20px;
-  display: flex;
-  transform: ${(props) => `translateX(${props.translate}px)`};
-`;
-
 const MainDiv = styled.div`
     padding: 0px 40px;
     display: flex;
@@ -238,7 +192,7 @@ const MainDiv = styled.div`
     left: 0;
 `;
 
-const directionIcon = styled.div``;
+
 
 const ViewDiv = styled.div`  
     top: 0;

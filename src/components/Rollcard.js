@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 
-const SecondCard = (props) => {
+const Rollcard = (props) => {
   return (
-    <SecondCardcontainer>
-      <Roundedmd>
+    <RollCardcontainer>
+      <Rolledmd>
         <Textbox>
           <Starwrap>
               <Starimg src={props.starimg}/>
@@ -15,14 +15,14 @@ const SecondCard = (props) => {
           <Title>{props.title}</Title>
         </Textbox>
         <CardImg2 src={props.imageURL} />
-      </Roundedmd>
-    </SecondCardcontainer>
+      </Rolledmd>
+    </RollCardcontainer>
   );
 };
 
-const SecondCardcontainer = styled.div``;
+const RollCardcontainer = styled.div``;
 
-const Roundedmd = styled.div`
+const Rolledmd = styled.div`
   border-radius:10px;
   margin-right: 30px;
   background-color: transparent;
@@ -36,7 +36,7 @@ const Roundedmd = styled.div`
 
 const CardImg2 = styled.img`
   width: 100%;
-  ${Roundedmd}:hover & {
+  ${Rolledmd}:hover & {
     position: relative;
     bottom: 20px;
   }
@@ -70,4 +70,4 @@ const TitleDesc = styled.div`
 `;
 const Title = styled.div``;
 
-export default SecondCard;
+export default Rollcard;
