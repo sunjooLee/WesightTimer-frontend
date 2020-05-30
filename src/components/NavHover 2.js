@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
 const cardDatas = [
@@ -41,16 +40,6 @@ const NavHover = (props) => {
     const hovered = props.isHovered;
     const onMouseLeave = props.onMouseLeave;
 
-    const goPlaylist = () => {
-        props.history.push("/playlistpage");
-    }
-
-    const selectCategory = (i) => {
-        if (i === 2) {
-            props.history.push("/stress");
-        }
-    }
-
     return (
         <>
             <ViewArea isHovered={hovered}>
@@ -72,7 +61,7 @@ const NavHover = (props) => {
                         </SeeAll>
                     </TextContainer>
                     <ImgContainer>
-                        <Playlists onClick={() => goPlaylist()}>
+                        <Playlists>
                             <PlaylistsImg src="https://insighttimer.com/static/media/playlists-menu.63bcbf99.png" />
                             <PlaylistsText>
                                 <ImgText>Intoducing</ImgText>
@@ -80,10 +69,9 @@ const NavHover = (props) => {
                             </PlaylistsText>
                         </Playlists>
                         <Cardlists>
-                            {cardDatas.map((data, i) => {
+                            {cardDatas.map(data => {
                                 return (
-
-                                    <Card url={data.imageURL} onClick={() => selectCategory(i)}>
+                                    <Card url={data.imageURL} >
                                         <CardLabel>
                                             <CardSubTitle>{data.description}</CardSubTitle>
                                             <CardTitle>{data.title}</CardTitle>
@@ -273,4 +261,4 @@ const CardTitle = styled.div`
     color: #FFFFFF;
 `;
 
-export default withRouter(NavHover);
+export default NavHover;

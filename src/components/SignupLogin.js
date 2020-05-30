@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { image, facebookLink } from '../config';
 
-const SignupLogin = () => {
+const SignupLogin = (props) => {
 
     const [emailInput, setEmailInput] = useState("");
     const [nameInput, setnameInput] = useState("");
@@ -47,6 +47,7 @@ const SignupLogin = () => {
                 console.log(response.status);
                 if (response.status === 200) {
                     alert("회원가입 되셨습니다.");
+                    props.history.push("/");
                 } else if (response.status === 400) {
                     alert("다시 확인해 주세요.")
                 }
@@ -86,7 +87,7 @@ const SignupLogin = () => {
     );
 }
 
-export default SignupLogin;
+export default withRouter(SignupLogin);
 
 // styled-components
 

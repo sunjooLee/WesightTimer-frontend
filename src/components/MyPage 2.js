@@ -1,27 +1,17 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
 
-const MyPage = ({ playedSong, isClicked, handleModal }, props) => {
+const MyPage = (props) => {
 
-    console.log("recent  ", playedSong)
-
-    const clicked = isClicked;
-    const onClickModal = handleModal;
-
-    const userName = localStorage.getItem('userName');
-    const userMail = localStorage.getItem('userMail');
+    const clicked = props.isClicked;
+    const onClickModal = props.handleModal;
 
     const logoutHandler = () => {
         localStorage.removeItem('token');
-        localStorage.removeItem('userName');
-        localStorage.removeItem('userMail');
         console.log("로그아웃");
-        props.history.push("/");
     }
 
-    const PlayedSongListArr = localStorage.getItem("playedSong").split(",");
+    console.log("aaaaaa", clicked);
 
     return (
         <>
@@ -30,26 +20,22 @@ const MyPage = ({ playedSong, isClicked, handleModal }, props) => {
                 <TopArea>
                     <Icon />
                     <MyInfo>
-                        <Name>{userName}</Name>
-                        <Email>{userMail}</Email>
+                        <Name>chodanbi</Name>
+                        <Email>danbiicho@gmail.com</Email>
                     </MyInfo>
                 </TopArea>
                 <MyLists>
-                    {PlayedSongListArr.map(song => (
-                        <List>{song}</List>
-                    ))}
-                    {/* <List>My Courses</List>
-                    <List></List>
+                    <List>My Courses</List>
+                    <List>My Bookmarks</List>
                     <List>My Playlists</List>
                     <List>My Profile</List>
-                    <List>My Subscription</List> */}
+                    <List>My Subscription</List>
                     <Logout onClick={() => logoutHandler()}>Logout</Logout>
                 </MyLists>
             </Container>
         </>
     )
 }
-
 
 const Overlay = styled.div`               
     width: 100vw;
@@ -136,11 +122,4 @@ const Logout = styled.li`
     cursor: pointer;
 `;
 
-const mapStateToProps = state => {
-    return {
-        playedSong: state.setPlaylistTitle.playedSong
-    }
-}
-
-export default withRouter(connect(mapStateToProps)(MyPage));
-
+export default MyPage;

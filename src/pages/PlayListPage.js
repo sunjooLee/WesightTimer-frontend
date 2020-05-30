@@ -249,8 +249,8 @@ const PrevButton = styled.button`
     background-color: #FFFFFF;
     justify-content: center;
     align-content: center;
-    top: 655px;
-    left: 40px;
+    top: 755px;
+    left: 45px;
     border-radius: 25px;
     border: none;
     cursor: pointer;
@@ -269,12 +269,14 @@ const NextButton = styled.button`
     display: flex;    
     justify-content: center;
     align-content: center;
-    top: 655px;
-    right: 40px;
+    top: 755px;
+    right: 55px;
     border-radius: 25px;
     border: none;
     cursor: pointer;
-    z-index: 100;
+    z-index: 10;
+    display: flex;
+    align-items: center;
 `;
 
 const ButtonLabel = styled.span``;
@@ -282,7 +284,7 @@ const ButtonLabel = styled.span``;
 const Icon = styled.svg`
     height: 24px;
     width: 24px;
-    color: #1b1b1b;   
+    color: #1b1b1b;       
 `;
 
 const AllplaylistsTitle = styled.h3`

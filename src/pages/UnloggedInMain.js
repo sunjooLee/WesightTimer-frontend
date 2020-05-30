@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-<<<<<<< HEAD
 import UnloggedNav from '../components/UnloggedNav';
-=======
-import UnloggdeNav from '../components/UnloggdeNav';
->>>>>>> fce223c... 로그인 후 회원 정보 가져오기 완료
 import LoginSelector from '../components/LoginSelector';
 import styled from 'styled-components';
 import { facebookLink } from '../config';
@@ -24,11 +20,8 @@ const UnloggedInMain = () => {
         <>
             <ViewDiv>
                 <MainDiv>
-<<<<<<< HEAD
                     <UnloggedNav onClickFromMain={() => setIsModalOpen(true)} />
-=======
-                    <UnloggdeNav onClickFromMain={() => setIsModalOpen(true)} />
->>>>>>> fce223c... 로그인 후 회원 정보 가져오기 완료
+
                     <LoginSelector setIsModalOpen={(state) => setIsModalOpen(state)} isVisible={isModalOpen} />
                     <UnloggedInSec>
                         <LeftLoginBox />
