@@ -25,7 +25,6 @@ const Player = ({match,history,playedSong,setPlaylistTitle}) => {
 
         let timer;
         localStorage.setItem("playedSong", currentClickedSong);
-
         if(isPlaying) {
 
         timer = setInterval(() => {
@@ -54,6 +53,7 @@ const Player = ({match,history,playedSong,setPlaylistTitle}) => {
         }, 1000); 
         }
         return () => clearInterval(timer);
+      
     }, [isPlaying, currentTime, currentClickedSong]);
 
 
@@ -102,8 +102,8 @@ const Player = ({match,history,playedSong,setPlaylistTitle}) => {
 
     //async await
     const fetchPlaylist = async () => {
-        //const playlistData = await axios.get(`http://localhost:3000/Data/Playlist.json`);
-        const playlistData = await axios.get(`http://10.58.2.238:8005/content/playlistinfo/1`);
+        const playlistData = await axios.get(`http://localhost:3000/Data/Playlist.json`);
+        //const playlistData = await axios.get(`http://10.58.2.238:8005/content/playlistinfo/1`);
         const playData = playlistData.data.playlist;
         const datalist = playlistData.data.content;
         setPlayContent(playData);

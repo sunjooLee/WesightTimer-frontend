@@ -7,6 +7,7 @@ import PopularPage from "./pages/PopularPage";
 import Player from "./pages/Player";
 import StressMusic from "./pages/StressMusic";
 import StressDetail from "./pages/StressDetail";
+import Mainsunju from "./pages/Mainsunju";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 
@@ -16,6 +17,7 @@ class Routes extends React.Component {
       <Router>
         <Switch>
           <Route exact path="/main" component={Main} />
+          <Route exact path="/mains" component={Mainsunju} />
           <Route exact path="/" component={UnloggedInMain} />
           <Route exact path="/playlist" component={Playlist} />
           <Route exact path="/playlistpage" component={PlayListPage} />

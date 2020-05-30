@@ -12,23 +12,17 @@ const UnloggedInMain = () => {
         setIsModalOpen(true);
     }
 
-    console.log(facebookLink);
-
     // console.log("Main.js - isModalOpen : ", isModalOpen)
 
     return (
         <>
             <ViewDiv>
                 <MainDiv>
-
                     <UnloggedNav onClickFromMain={() => setIsModalOpen(true)} />
-
-
                     <LoginSelector setIsModalOpen={(state) => setIsModalOpen(state)} isVisible={isModalOpen} />
                     <UnloggedInSec>
                         <LeftLoginBox />
                         <ImgBox >
-                            {/* <A href="https://www.facebook.com/v7.0/dialog/oauth?client_id=268946514245799&redirect_uri=https://10.58.2.238:8001/user/login">Sign up</A> */}
                             <ImgIns src="https://insighttimer.com/static/media/home_desktop_v1.41c5e3a2.jpg" alt="loginImg" />
                         </ImgBox>
                     </UnloggedInSec>

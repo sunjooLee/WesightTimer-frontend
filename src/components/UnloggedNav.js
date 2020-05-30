@@ -84,6 +84,7 @@ const Nav = styled.div`
   max-width: 0 auto;
   width: 100%;  
   position: relative;
+  font-family: ProximaNovaBold;
 `;
 
 const MuitoolWrapper = styled.div`

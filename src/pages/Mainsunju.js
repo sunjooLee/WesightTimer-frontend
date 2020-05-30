@@ -1,71 +1,81 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react'
+import styled from 'styled-components';
+import Slider from './Slider';
+import Card from './Card';
+import Nav from '../components/Nav';
 import axios from 'axios';
-import Nav from "../components/Nav";
-import Card from "./Card";
-import styled from "styled-components";
-import Slider from "./Slider";
-import Scroll from "./Scroll";
-import SecondCard from "../components/SecondCard";
-import Thirddata from "../components/Thirddata";
-import NavHover from '../components/NavHover';
 
 const cardDatas = [
-  {
-    title: "Sleep",
-    description: "Improve your",
-    imageURL: "https://insighttimer.com/static/media/sleep.ba804918.jpg",
-  },
-  {
-    title: "Anxiety",
-    description: "Coping with",
-    imageURL:
-      "https://insighttimer.com/static/media/anxiety-mountain.9ebb5c46.jpg",
-  },
-  {
-    title: "Stress",
-    description: "Managing",
-    imageURL: "https://insighttimer.com/static/media/stress-ocean.5a1a74dd.jpg",
-  },
-  {
-    title: "Music",
-    description: "Meditation",
-    imageURL: "https://insighttimer.com/static/media/music-bamboo.4b8ca527.jpg",
-  },
-  {
-    title: "Kids",
-    description: "Meditation for",
-    imageURL: "https://insighttimer.com/static/media/kids.50b95572.jpg",
-  },
-];
+    {
+      title: "Sleep",
+      description: "Improve your",
+      imageURL: "https://insighttimer.com/static/media/sleep.ba804918.jpg",
+    },
+    {
+      title: "Anxiety",
+      description: "Coping with",
+      imageURL:
+        "https://insighttimer.com/static/media/anxiety-mountain.9ebb5c46.jpg",
+    },
+    {
+      title: "Stress",
+      description: "Managing",
+      imageURL: "https://insighttimer.com/static/media/stress-ocean.5a1a74dd.jpg",
+    },
+    {
+      title: "Music",
+      description: "Meditation",
+      imageURL: "https://insighttimer.com/static/media/music-bamboo.4b8ca527.jpg",
+    },
+    {
+      title: "Kids",
+      description: "Meditation for",
+      imageURL: "https://insighttimer.com/static/media/kids.50b95572.jpg",
+    },
+  ];
 
-const MainContents = () => {
-  const [number, setNumber] = useState(0);
-  const [translate, setTranslate] = useState(0);
-  const [button, setButton] = useState(`hidden`);
-  
-  const handleClickRight = () => {
-    setNumber(number + 1);
-    setTranslate(translate - 300.45);
-    console.log(`number: `, number);
-    // console.log(“translate: “, translate);
-   
-    if (number >= 0) {
-      setButton(`visible`);    
+const Mainsunju = () => {
+
+    const [mainData, setMainData] = useState([]);
+    const [offsetIdx, setOffsetIdx] = useState(0);
+    const [addedlist, setAddedlist] = useState([]);
+
+    const fetchMainData = async () => {
+        const mainData = await axios.get(`http://10.58.1.150:8000/content/main?offset=${offsetIdx}&limit=5`);
+        setAddedlist(mainData.data);
+        setMainData(mainData.data);
+    };
+
+    const handleInfiniteScroll = (e) => {
+
+        const { scrollHeight } = document.body;
+
+        const scrollY = window.scrollY;
+
+        if((scrollHeight - scrollY) <= 1000) {
+
+            console.log("reached!!!");  
+            setOffsetIdx(offsetIdx => offsetIdx+=5);
+        }
     }
-  };
 
-  const handleClickLeft = () => {
-    setNumber(number - 1);
-    // setTranslate(translate + 424.75);
-    setTranslate(translate + 300.45);
-    console.log(`sas: `, number);
-    if (number === 1) {
-      setButton(`hidden`);
-    }
-  };
+    useEffect(()=>{
+        fetchMainData();
+        window.addEventListener("scroll", handleInfiniteScroll);
+    }, []);
 
-  return (
-    <MainWrap>
+    useEffect(()=>{
+        fetchMainData();
+        setAddedlist(addedlist.concat(mainData));
+        setMainData(addedlist);
+    },[offsetIdx])
+
+
+    console.log("adddeslisssstt     ", addedlist);
+    console.log("currentOffsetIdx    ", offsetIdx);
+
+    return (
+        <MainWrap>
       <Nav />     
       <ViewDiv />      
       <Webheder>
@@ -115,12 +125,18 @@ const MainContents = () => {
       <Slider />
       <Slider />
       <Slider />
-      <Scroll />
     </MainWrap>
-  );
-};
+    )
+}
 
+const Essentialwrap = styled.div`
+  position: relative;
+`;
 
+const Js23wfull = styled.span`
+  font-family: ProximaNovaBold;
+  font-size: 27px;
+`;
 
 const MainWrap = styled.div`
   display: flex;
@@ -129,6 +145,40 @@ const MainWrap = styled.div`
   align-items: center;
 `;
 
+const NextButton = styled.button`
+  top: 260px;
+  right: 15px;
+  border: 1px solid black;
+  width: 47px;
+  height: 47px;
+  position: absolute;
+  background-color: white;
+  border-radius: 20px;
+  z-index: 200;
+`;
+
+const ButtonLabel = styled.div``;
+
+const PrevButton = styled.button`
+  top: 265px;
+  left: -20px;
+  border: 1px solid black;
+  width: 47px;
+  height: 47px;
+  position: absolute;
+  z-index: 200;
+  border-radius: 20px;
+  background-color: white;
+`;
+
+const Essentialfull = styled.div`
+  margin: 0, auto;
+  margin-top: 100px;
+  flex: 1;
+  width: 1600px;
+  box-sizing: inherit;
+  overflow: hidden;
+`;
 
 const Library = styled.span`
   display: inline-block;
@@ -180,6 +230,13 @@ const ContentsWrap = styled.section`
 `;
 
 
+const SwiperWrap = styled.section`
+  width: 3200px;
+  padding-top: 20px;
+  display: flex;
+  transform: ${(props) => `translateX(${props.translate}px)`};
+`;
+
 const MainDiv = styled.div`
     padding: 0px 40px;
     display: flex;
@@ -193,11 +250,12 @@ const MainDiv = styled.div`
     left: 0;
 `;
 
-
+const directionIcon = styled.div``;
 
 const ViewDiv = styled.div`  
     top: 0;
     left: 0;
 `;
 
-export default MainContents;
+
+export default Mainsunju;

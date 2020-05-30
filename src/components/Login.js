@@ -46,7 +46,6 @@ const Login = (props) => {
                     localStorage.setItem("userName", response.name);
                     localStorage.setItem("userMail", response.email);
                     props.history.push("/main");
-
                 }
             })
     }
