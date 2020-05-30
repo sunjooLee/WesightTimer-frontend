@@ -45,7 +45,7 @@ const Login = (props) => {
                     localStorage.setItem("token", response.token_issued);
                     localStorage.setItem("userName", response.name);
                     localStorage.setItem("userMail", response.email);
-                    props.history.push("/main")
+                    props.history.push("/main");
                 }
             })
     }

@@ -18,7 +18,7 @@ const MyPage = ({ playedSong, isClicked, handleModal, props }) => {
         localStorage.removeItem('userName');
         localStorage.removeItem('userMail');
         console.log("로그아웃");
-        props.history.push("/")
+        props.history.push("/");
     }
 
     const PlayedSongListArr = localStorage.getItem("playedSong").split(",");

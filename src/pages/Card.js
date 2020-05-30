@@ -28,7 +28,6 @@ const CardContent = styled.div`
   height: 100%;
   box-sizing: inherit;
   position: relative;
-
   overflow: hidden;
 `;
 

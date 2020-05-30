@@ -10,7 +10,7 @@ const Slider = () => {
 
   const handleClickRight = () => {
     setNumber(number + 1);
-    setTranslate(translate - (290 + 15));
+    setTranslate(translate - (300 -15));
     console.log(`number: `, number);
     // console.log(“translate: “, translate);
     // console.log(“aaaa”, button);
@@ -22,7 +22,7 @@ const Slider = () => {
   const handleClickLeft = () => {
     setNumber(number - 1);
     // setTranslate(translate + 424.75);
-    setTranslate(translate + (290 + 15));
+    setTranslate(translate + (300 -15));
     console.log(`sas: `, number);
     if (number === 1) {
       setButton(`hidden`);
@@ -60,14 +60,13 @@ const Slider = () => {
           </directionIcon>
         </ButtonLabel>
       </NextButton>
-
       <Essentialfull>
-        <Js23wfull>Essential Listening</Js23wfull>
-
         <SwiperWrap translate={translate}>
           {Thirddata.map((x) => {
             return (
               <SecondCard
+                starimg={x.starimg}
+                starscore={x.starscore}
                 description={x.description}
                 title={x.title}
                 imageURL={x.imageURL}
@@ -81,25 +80,15 @@ const Slider = () => {
 };
 
 const Essentialwrap = styled.div`
+  width:1375px;
   position: relative;
   color: #FFFFFF;
 `;
 
-const Js23wfull = styled.span`
-  font-family: ProximaNovaBold;
-  font-size: 27px;
-`;
-
-const MainWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
 
 const NextButton = styled.button`
-  top: 260px;
-  right: 15px;
+  top: 60%;
+  right: -21px;
   border: 1px solid black;
   width: 47px;
   height: 47px;
@@ -112,7 +101,7 @@ const NextButton = styled.button`
 const ButtonLabel = styled.div``;
 
 const PrevButton = styled.button`
-  top: 265px;
+  top: 60%;
   left: -20px;
   border: 1px solid black;
   width: 47px;
@@ -124,6 +113,7 @@ const PrevButton = styled.button`
 `;
 
 const Essentialfull = styled.div`
+  
   margin: 0, auto;
   margin-top: 100px;
   flex: 1;
@@ -132,55 +122,13 @@ const Essentialfull = styled.div`
   overflow: hidden;
 `;
 
-const Library = styled.span`
-  display: inline-block;
-  font-family: ProximaNovaBold;
-  font-size: 47px;
-  margin-top: 40px;
-`;
-
-const Freesvg = styled.svg`
-  width: 93px;
-  height: 83px;
-  opacity: 0.8;
-  overflow: hidden;
-  padding-left: 5px;
-  padding-right: 10px;
-`;
-
-const Webheder = styled.div`
-  padding-top: 100px;
-
-  display: flex;
-  justify-content: center;
-  border: 1px solid black;
-  width: 950px;
-  overflow: hidden;
-  line-height: 1.2;
-  text-align: center;
-`;
-
-const Thelarge = styled.span`
-  font-family: ProximaNovaBold;
-  font-size: 47px;
-  margin-top: 40px;
-`;
-
-const ContentsWrap = styled.section`
-  width: 1680px;
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-top: 180px;
-  display: flex;
-`;
 
 const SwiperWrap = styled.section`
-  width: 3200px;
+  width: 3518px;
   padding-top: 20px;
   display: flex;
   transform: ${(props) => `translateX(${props.translate}px)`};
 `;
 
-const directionIcon = styled.div``;
 
 export default Slider;
