@@ -4,13 +4,13 @@ import SecondCard from "../components/SecondCard";
 import Rolldata from "../components/Thirddata";
 import Rollcard from "../components/Rollcard"
 
-const Scroll = () => {
+const Scroll = (props) => {
 
   return (
     <Essentialwrap>
       <Essentialfull>
         <SwiperWrap>
-          {Rolldata.map((x) => {
+          {props.data && props.data.map((x) => {
             return (
               <Rollcard
                 starimg={x.starimg}
@@ -28,30 +28,29 @@ const Scroll = () => {
 };
 
 const Essentialwrap = styled.div`
-  width:1375px;
+  width: 100vw;
   position: relative;
   color: #FFFFFF;
 `;
-
-
 
 const Essentialfull = styled.div`
   
   margin: 0, auto;
   margin-top: 100px;
-  flex: 1;
-  width: inherit;
+  width: 100vw;
   box-sizing: inherit;
   overflow:hidden;
   
 `;
 
-
 const SwiperWrap = styled.section`
-  width: 3518px;
+  width: inherit;
   padding-top: 20px;
-  display: flex;
   transform: ${(props) => `translateX(${props.translate}px)`};
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 `;
 
 

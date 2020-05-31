@@ -1,14 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-
 const Rollcard = (props) => {
   return (
     <RollCardcontainer>
       <Rolledmd>
         <Textbox>
           <Starwrap>
-              <Starimg src={props.starimg}/>
               <Starscore>{props.starscore}</Starscore>
           </Starwrap>
           <TitleDesc>{props.description}</TitleDesc>
@@ -20,38 +18,37 @@ const Rollcard = (props) => {
   );
 };
 
-const RollCardcontainer = styled.div``;
+const RollCardcontainer = styled.div`
+  display: flex;
+  width: 340px;
+  &:hover {
+    transform: translateY(-10px);
+  }
+  transition: all 0.4s ease-in-out;
+`;
 
 const Rolledmd = styled.div`
-  border-radius:10px;
   margin-right: 30px;
+  margin-bottom: 20px;
   background-color: transparent;
   flex: 1;
-  width: auto;
+  width: 50%;
   height: 100%;
   box-sizing: inherit;
   position: relative;
-  overflow: hidden;
 `;
 
 const CardImg2 = styled.img`
+
+  border-radius:10px;
   width: 100%;
-  ${Rolledmd}:hover & {
-    position: relative;
-    bottom: 20px;
-  }
 `;
 const Starwrap = styled.div`
   display:flex;
   `;
 
-const Starimg = styled.img`
-  width:12px;
-  height:12px;
-  `;
 const Starscore=styled.div`
   `;
-
 
 const Textbox = styled.div`
   position: absolute;

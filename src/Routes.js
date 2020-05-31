@@ -17,7 +17,6 @@ class Routes extends React.Component {
       <Router>
         <Switch>
           <Route exact path="/main" component={Main} />
-          <Route exact path="/mains" component={Mainsunju} />
           <Route exact path="/" component={UnloggedInMain} />
           <Route exact path="/playlist" component={Playlist} />
           <Route exact path="/playlistpage" component={PlayListPage} />
