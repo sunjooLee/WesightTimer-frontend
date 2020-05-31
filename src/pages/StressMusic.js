@@ -3,12 +3,16 @@ import axios from 'axios';
 import Nav from '../components/Nav';
 import Slider from "./Slider";
 import styled from 'styled-components';
+import Thirddata from "../components/Thirddata";
 
 const StressMusic = (props) => {
 
     const [stress, setStressData] = useState([]);
     const [teacher, setTeacherData] = useState([]);
     const [stressDetail, setStressDetailData] = useState([]);
+
+    const firstRow = Thirddata.filter((item,idx)=>{return idx<=8});
+    const secondRow = Thirddata.filter((item,idx)=>{return idx>=8 && idx<=12});
 
     const goToDetailPage = () => {
         props.history.push("/stressDetail");
@@ -25,8 +29,8 @@ const StressMusic = (props) => {
                     <Desc><P>The long-term effects of stress can be detrimental to our health and also lead to anxiety and depression. Meditation for stress relief and mindfulness techniques can help to counter these effects by lowering stress hormones and decreasing inflammation in the body.</P></Desc>
                 </Header>}
                 <StressDiv onClick={()=>{goToDetailPage()}}>
-                    <Slider/>
-                    <Slider/>
+                    <Slider data={firstRow}/>
+                    <Slider data={secondRow}/>
                 </StressDiv>
                 </ContentsWrapper>
             </StressSec>
@@ -89,10 +93,13 @@ const P = styled.p`
 `;
 
 const StressDiv = styled.div`
-    width: 1732px;
+    width: 75%;
     //margin-top: 3rem;
-    align-self:center;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `;
 
 export default StressMusic;

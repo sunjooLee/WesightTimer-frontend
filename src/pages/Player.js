@@ -69,7 +69,7 @@ const Player = ({match,history,playedSong,setPlaylistTitle}) => {
 
     const goBack = () => {
         audio.current.pause();
-        history.goBack();
+        history.push("/playlist");
     }
 
     const setPlaytitleInLs = (title) => {
@@ -302,6 +302,7 @@ const CloseBtn = styled.button`
     padding: 0 auto;
     display: flex;
     justify-content: center;
+    align-items: center;
     border: 0;
 `;
 

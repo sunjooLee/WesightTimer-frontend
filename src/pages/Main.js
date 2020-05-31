@@ -5,9 +5,7 @@ import Card from "./Card";
 import styled from "styled-components";
 import Slider from "./Slider";
 import Scroll from "./Scroll";
-import SecondCard from "../components/SecondCard";
 import Thirddata from "../components/Thirddata";
-import NavHover from '../components/NavHover';
 
 const cardDatas = [
   {
@@ -38,32 +36,53 @@ const cardDatas = [
   },
 ];
 
+
+
+
 const MainContents = () => {
-  const [number, setNumber] = useState(0);
-  const [translate, setTranslate] = useState(0);
-  const [button, setButton] = useState(`hidden`);
+ 
+  const [mainData, setMainData] = useState([]);
+  const [limit, setLimit] = useState(5);
+  const [count, setCount] = useState(0);
+  const [addedlist, setAddedlist] = useState([]);
+
+    const fetchMainData = async () => {
+        const data = await axios.get(`http://10.58.1.150:8000/content/main?offset=${limit * (count + 1)}&limit=${limit}`);
+        setAddedlist(data.data.Rolldata);
+        setMainData(data.data.Rolldata);
+
+        if(count !== 0) {
+
+          const newAdding = addedlist.concat(mainData);
+          console.log(newAdding);
+          setAddedlist(newAdding);
+
+        }
+
+    };
+
+    const handleInfiniteScroll = (e) => {
+        const { scrollY } = window;
+
+        if(scrollY >= 1900 * (count + 1)) {
+            console.log("reached!!!");
+            setCount(count => count+=1);
+        }
+    }
+
+    useEffect(()=>{
+        window.addEventListener("scroll", handleInfiniteScroll, true);
+    }, []);
+
+    useEffect(()=>{
+        fetchMainData();
+        setMainData(addedlist);
+    },[count]);
+
+    const firstRow = Thirddata.filter((item,idx)=>{return idx<=4});
+    const secondRow = Thirddata.filter((item,idx)=>{return idx>=4 && idx<=8});
+    const thirdRow = Thirddata.filter((item,idx)=>{return idx>=8 && idx<=12});
   
-  const handleClickRight = () => {
-    setNumber(number + 1);
-    setTranslate(translate - 300.45);
-    console.log(`number: `, number);
-    // console.log(“translate: “, translate);
-   
-    if (number >= 0) {
-      setButton(`visible`);    
-    }
-  };
-
-  const handleClickLeft = () => {
-    setNumber(number - 1);
-    // setTranslate(translate + 424.75);
-    setTranslate(translate + 300.45);
-    console.log(`sas: `, number);
-    if (number === 1) {
-      setButton(`hidden`);
-    }
-  };
-
   return (
     <MainWrap>
       <Nav />     
@@ -110,17 +129,13 @@ const MainContents = () => {
           );
         })}       
       </ContentsWrap>
-      <Slider />
-      <Slider />
-      <Slider />
-      <Slider />
-      <Slider />
-      <Scroll />
+      <Slider data={firstRow}/>
+      <Slider data={secondRow}/>
+      <Slider data={thirdRow}/>
+      <Scroll data={addedlist}/>
     </MainWrap>
   );
 };
-
-
 
 const MainWrap = styled.div`
   display: flex;

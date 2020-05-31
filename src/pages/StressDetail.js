@@ -52,7 +52,7 @@ const StressDetail = () => {
   
     useEffect(()=>{
 
-        fetch("http://10.58.3.50:8000/content/detail?content_id=1")
+        fetch("http://13.124.151.251:8000/content/detail?content_id=1")
         .then((res)=> res.json())
         .then((res) => {
             setMusicInfo(res.musicInfo);
@@ -75,13 +75,13 @@ const StressDetail = () => {
     
         });
 
-        fetch("http://10.58.3.50:8000/user/teacher?teacher_id=1")
+        fetch("http://13.124.151.251:8000/user/teacher?teacher_id=1")
         .then((res)=> res.json())
         .then((res) => {
             setTeacherDetail(res.teacherDetail);
         });
 
-        fetch("http://10.58.3.50:8000/content/stressreview?content_id=1")
+        fetch("http://13.124.151.251:8000/content/stressreview?content_id=1")
         .then((res)=> res.json())
         .then((res) => {
             setReviews(res.reviews);
@@ -146,7 +146,6 @@ const StressDetail = () => {
                             </PlayerControlKit>
                             <PlaylistControlKit>
                                 <BtnWrapper>
-                                    <PlaylistControlBtn><svg width="36" height="24" viewBox="0 0 36 24"><g fill="none" fill-rule="evenodd" stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" opacity="0.298"><path d="M0 14.545L0 20 11.294 20" transform="translate(2 2)"></path><g><path d="M0 0L0 5.455 11.294 5.455" transform="translate(2 2) rotate(180 16 2.727)"></path><path d="M20.706 0L20.706 5.455 32 5.455" transform="translate(2 2) rotate(180 16 2.727) matrix(-1 0 0 1 52.706 0)"></path></g><path d="M20.706 14.545L20.706 20 32 20" transform="translate(2 2) matrix(-1 0 0 1 52.706 0)"></path></g></svg></PlaylistControlBtn>
                                     <PlaylistControlBtn><svg width="27" height="24" viewBox="0 0 27 24" class="opacity-25 sm:opacity-100 h-4 sm:h-6"><g fill="none" fill-rule="evenodd"><g stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"><path d="M0 11.191L7.443 11.191M0 1.562L7.443 1.562M0 20.82L20.555 20.82" transform="translate(2 1) translate(0 .692)"></path></g><path fill="#FFF" d="M14.4 1.137v10.618c0 .663.537 1.2 1.2 1.2.252 0 .498-.08.703-.227l7.35-5.31c.538-.387.659-1.137.27-1.674-.074-.104-.165-.196-.27-.27l-7.35-5.31c-.538-.388-1.288-.267-1.676.27-.148.205-.227.45-.227.703z" transform="translate(2 1)"></path></g></svg></PlaylistControlBtn>
                                 </BtnWrapper>
                             </PlaylistControlKit>

@@ -91,7 +91,7 @@ const NavHover = (props) => {
                                     </Card>
                                 );
                             }
-                            )})
+                            )}
                         </Cardlists>
                     </ImgContainer>
                 </HoverContainer >

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import SecondCard from "../components/SecondCard";
 import Thirddata from "../components/Thirddata";
 
-const Slider = () => {
+const Slider = (props) => {
   const [number, setNumber] = useState(0);
   const [translate, setTranslate] = useState(0);
   const [button, setButton] = useState(`hidden`);
@@ -62,7 +62,7 @@ const Slider = () => {
       </NextButton>
       <Essentialfull>
         <SwiperWrap translate={translate}>
-          {Thirddata.map((x) => {
+          {props.data && props.data.map((x) => {
             return (
               <SecondCard
                 starimg={x.starimg}
@@ -85,31 +85,41 @@ const Essentialwrap = styled.div`
   color: #FFFFFF;
 `;
 
-
 const NextButton = styled.button`
-  top: 60%;
-  right: -21px;
-  border: 1px solid black;
-  width: 47px;
-  height: 47px;
-  position: absolute;
-  background-color: white;
-  border-radius: 20px;
-  z-index: 200;
+
+    width: 50px;
+    height: 50px;    
+    position: absolute; 
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px -2px;
+    background-color: #FFFFFF;
+    justify-content: center;
+    align-content: center;
+    top: 60%;
+    right: -21px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    z-index: 200;
+    //transform: rotate(180deg);    
 `;
 
 const ButtonLabel = styled.div``;
 
 const PrevButton = styled.button`
-  top: 60%;
-  left: -20px;
-  border: 1px solid black;
-  width: 47px;
-  height: 47px;
-  position: absolute;
-  z-index: 200;
-  border-radius: 20px;
-  background-color: white;
+    width: 50px;
+    height: 50px;    
+    position: absolute; 
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px -2px;
+    background-color: #FFFFFF;
+    justify-content: center;
+    align-content: center;
+    top: 60%;
+    left: -20px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    z-index: 200;
+    //transform: rotate(180deg);    
 `;
 
 const Essentialfull = styled.div`

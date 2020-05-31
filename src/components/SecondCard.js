@@ -20,7 +20,12 @@ const SecondCard = (props) => {
   );
 };
 
-const SecondCardcontainer = styled.div``;
+const SecondCardcontainer = styled.div`
+  &:hover {
+    transform: translateY(-10px);
+    transition: all 0.3s ease-in-out;
+  }
+`;
 
 const Roundedmd = styled.div`
   border-radius:10px;
@@ -36,10 +41,6 @@ const Roundedmd = styled.div`
 
 const CardImg2 = styled.img`
   width: 100%;
-  ${Roundedmd}:hover & {
-    position: relative;
-    bottom: 20px;
-  }
 `;
 const Starwrap = styled.div`
   display:flex;

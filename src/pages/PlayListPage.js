@@ -14,7 +14,7 @@ const PlayListPage = (props) => {
     const [staffPick, setStaffPick] = useState([]);
 
     useEffect(() => {
-        fetch(`http://10.58.2.238:8005/content/playlistmain`)
+        fetch(`http://13.124.151.251:8000/content/playlistmain`)
             .then((response) => response.json())
             .then((response) => {
                 setStaffPick(response.staff_pick);
