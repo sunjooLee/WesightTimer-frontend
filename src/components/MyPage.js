@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
-const MyPage = ({ playedSong, isClicked, handleModal, props }) => {
+const MyPage = ({ playedSong, isClicked, handleModal, props, history }) => {
 
     console.log("recent  ", playedSong)
 
@@ -18,10 +18,10 @@ const MyPage = ({ playedSong, isClicked, handleModal, props }) => {
         localStorage.removeItem('userName');
         localStorage.removeItem('userMail');
         console.log("로그아웃");
-        props.history.push("/");
+        history.push("/");
     }
 
-    const PlayedSongListArr = localStorage.getItem("playedSong").split(",");
+    const recent5Songs = localStorage.getItem("playedSong").split(",").filter((item, idx) => idx <= 4);
 
     return (
         <>
@@ -35,7 +35,7 @@ const MyPage = ({ playedSong, isClicked, handleModal, props }) => {
                     </MyInfo>
                 </TopArea>
                 <MyLists>
-                    {PlayedSongListArr.map(song => (
+                    {recent5Songs.map(song => (
                         <List>{song}</List>
                     ))}
                     {/* <List>My Courses</List>
@@ -73,6 +73,7 @@ const Container = styled.div`
     top: 20px;
     right: 15px;
     visibility: ${props => props.isClicked ? "visible" : "hidden"};
+    z-index: 500;
 `;
 
 const TopArea = styled.div`  
