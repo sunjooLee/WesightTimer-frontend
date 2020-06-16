@@ -18,8 +18,8 @@
 
 ### 사용된 기술
 
-Frontend : ** ReactJS (React Hooks), Styled Components, Redux **
-Backend : ** Python, Django, MySQL, CORS headers**  
+Frontend : **ReactJS (React Hooks), Styled Components, Redux**
+Backend : **Python, Django, MySQL, CORS headers**  
 Deployment : -
 
 ---
