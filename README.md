@@ -35,4 +35,4 @@ Deployment : -
 
 ### 데모영상
 
-(https://youtu.be/yaO4jlIrlY8)
+(https://www.youtube.com/watch?v=SW3sRK-Oi4M&feature=youtu.be)
